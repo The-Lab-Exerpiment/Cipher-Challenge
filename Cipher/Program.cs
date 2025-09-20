@@ -47,12 +47,15 @@ namespace cipher
                         int split = int.Parse(Console.ReadLine());
 
                         string placeholder = cipher.GetCipher();
+                        cipher.RemoveFiller();
 
                         for (int i = 0; i < split; i++)
                         {
                             Console.WriteLine(cipher.IOC(split, i));
                             cipher.SetCipher(placeholder);
                         }
+
+                        cipher.AddFiller();
                         break;
 
                     case "check":
@@ -92,6 +95,10 @@ namespace cipher
 
                     case "og":
                         Console.WriteLine(cipher.GetCipher());
+                        break;
+
+                    case "read":
+                        cipher.ReadFile();
                         break;
                 }
 

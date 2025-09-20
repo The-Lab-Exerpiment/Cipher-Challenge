@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace cipher
 {
@@ -214,15 +215,14 @@ namespace cipher
 
         public double IOC(int split, int offset)
         {
-            RemoveFiller();
 
             for (int i = offset; i < altText.Length; i += split)
             {
                 temp += altText[i];
             }
 
-            AddFiller();
             cipherText = temp;
+            temp = "";
 
             return IOC();
         }
@@ -346,6 +346,12 @@ namespace cipher
             }
 
             altText = temp;
+        }
+
+        public void ReadFile()
+        {
+            cipherText = File.ReadAllText("Resources/cipher.txt");
+            altText = cipherText;
         }
     };
 }
