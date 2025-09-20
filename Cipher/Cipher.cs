@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace cipher
         private string cipherText;
         private string altText;
 
-        public void GetCipher()
+        public void InitCipher()
         {
             Console.Write("Enter cipher: ");
             cipherText = Console.ReadLine().ToUpper();
@@ -38,6 +39,8 @@ namespace cipher
 
         public void AddFiller()
         {
+            RemoveFiller();
+
             int setback = 0;
             string temp = "";
 
@@ -167,6 +170,11 @@ namespace cipher
                 repeat += same * (same - 1);
             }
 
+            if (repeat == 0)
+            {
+                return 0;
+            }
+
             foreach (char letter in cipherText)
             {
                 int ascii = letter;
@@ -185,6 +193,51 @@ namespace cipher
         public static bool InABC(int ascii)
         {
             return (ascii >= 65 && ascii < 91) || (ascii >= 97 && ascii < 123);
+        }
+
+        public void Separate()
+        {
+            Console.Write("How much to separate by: ");
+            int separate = int.Parse(Console.ReadLine());
+
+            RemoveFiller();
+            string temp = "";
+
+            for (int i = 0; i < altText.Length; i += separate)
+            {
+                for (int j = 0; j < separate && i + j < altText.Length; j++)
+                {
+                    temp += altText[i + j];
+                }
+
+                temp += " ";
+            }
+
+            altText = temp;
+        }
+
+        public double IOC(int split, int offset)
+        {
+            string temp = "";
+
+            for (int i = offset; i < altText.Length; i += split)
+            {
+                temp += altText[i];
+            }
+
+            cipherText = temp;
+
+            return IOC();
+        }
+
+        public string GetCipher()
+        {
+            return cipherText;
+        }
+
+        public void SetCipher(string text)
+        {
+            cipherText = text;
         }
     };
 }

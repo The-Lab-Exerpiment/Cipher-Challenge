@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rajas\\source\\repos\\Cipher\\Cipher\\Cipher.csproj",
+      "projectUniqueName": "C:\\Users\\rajas\\source\\repos\\Cipher-Challenge\\Cipher\\Cipher.csproj",
       "projectName": "Cipher",
-      "projectPath": "C:\\Users\\rajas\\source\\repos\\Cipher\\Cipher\\Cipher.csproj",
+      "projectPath": "C:\\Users\\rajas\\source\\repos\\Cipher-Challenge\\Cipher\\Cipher.csproj",
       "packagesPath": "C:\\Users\\rajas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rajas\\source\\repos\\Cipher\\Cipher\\obj\\",
+      "outputPath": "C:\\Users\\rajas\\source\\repos\\Cipher-Challenge\\Cipher\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
