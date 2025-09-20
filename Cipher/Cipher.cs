@@ -314,5 +314,38 @@ namespace cipher
 
             AddFiller();
         }
+
+        public void Invert(int length)
+        {
+            RemoveFiller();
+
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; i + j < altText.Length; j += length)
+                {
+                    temp += altText[i + j];
+                }
+                temp += " ";
+            }
+
+            altText = temp;
+        }
+
+        public void Tower(int length)
+        {
+            RemoveFiller();
+
+            for (int i = 0; i < altText.Length; i += length)
+            {
+                for (int j = 0; j < length && i + j < altText.Length; j++)
+                {
+                    temp += altText[i + j];
+                }
+
+                temp += "\n";
+            }
+
+            altText = temp;
+        }
     };
 }

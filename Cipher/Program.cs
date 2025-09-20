@@ -62,7 +62,7 @@ namespace cipher
                         Console.WriteLine(cipher.CheckPhrase(phrase));
                         break;
 
-                    case "switch column":
+                    case "switch":
                         Console.Write("Length of column: ");
                         int length = int.Parse(Console.ReadLine());
 
@@ -76,6 +76,22 @@ namespace cipher
                         {
                             cipher.SwitchColumns(length, col1 - 1, col2 - 1);
                         }
+                        break;
+
+                    case "invert":
+                        Console.Write("Length of row: ");
+                        length = int.Parse(Console.ReadLine());
+                        cipher.Invert(length);
+                        break;
+
+                    case "stack":
+                        Console.Write("Length of row: ");
+                        length = int.Parse(Console.ReadLine());
+                        cipher.Tower(length);
+                        break;
+
+                    case "og":
+                        Console.WriteLine(cipher.GetCipher());
                         break;
                 }
 
