@@ -218,6 +218,7 @@ namespace cipher
 
         public double IOC(int split, int offset)
         {
+            RemoveFiller();
             string temp = "";
 
             for (int i = offset; i < altText.Length; i += split)
@@ -225,6 +226,7 @@ namespace cipher
                 temp += altText[i];
             }
 
+            AddFiller();
             cipherText = temp;
 
             return IOC();

@@ -51,9 +51,8 @@ namespace cipher
                         for (int i = 0; i < split; i++)
                         {
                             Console.WriteLine(cipher.IOC(split, i));
+                            cipher.SetCipher(temp);
                         }
-
-                        cipher.SetCipher(temp);
                         break;
                 }
 
