@@ -54,6 +54,13 @@ namespace cipher
                             cipher.SetCipher(temp);
                         }
                         break;
+
+                    case "check":
+                        Console.Write("Phrase: ");
+                        string phrase = Console.ReadLine();
+
+                        Console.WriteLine(cipher.CheckPhrase(phrase));
+                        break;
                 }
 
                 cipher.PrintAlt();

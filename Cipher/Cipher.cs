@@ -241,5 +241,47 @@ namespace cipher
         {
             cipherText = text;
         }
+
+        public int TotalLetters()
+        {
+            int total = 0;
+
+            foreach (char letter in altText)
+            {
+                if (InABC(letter))
+                {
+                    total++;
+                }
+            }
+
+            return total;
+        }
+
+        public int CheckPhrase(string phrase)
+        {
+            RemoveFiller();
+
+            int total = 0;
+
+            for (int i = 0; i < altText.Length; i++)
+            {
+                bool found = true;
+
+                for (int j = 0; j < phrase.Length && i + j < altText.Length; j++)
+                {
+                    if (altText[i + j] != phrase[j])
+                    {
+                        found = false;
+                    }
+                }
+
+                if (found)
+                {
+                    total++;
+                }
+            }
+
+            return total;
+        }
     };
 }
