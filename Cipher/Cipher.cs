@@ -353,5 +353,34 @@ namespace cipher
             cipherText = File.ReadAllText("Resources/cipher.txt");
             altText = cipherText;
         }
+
+        public int FrequencyAnalysis(char chara)
+        {
+            int count = 0;
+
+            foreach (char letter in altText)
+            {
+                if (letter == chara)
+                {
+                    count++;
+                }
+            }
+
+            return Round((double)count * 100 / TotalLetters());
+        }
+
+        public double FrequencyAnalysis(int ascii)
+        {
+            char chara = (char)ascii;
+
+            return FrequencyAnalysis(chara);
+        }
+
+        public static int Round(double num)
+        {
+            num += 0.5;
+
+            return (int)num;
+        }
     };
 }

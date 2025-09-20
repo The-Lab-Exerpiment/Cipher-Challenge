@@ -26,3 +26,4 @@ C:\Users\rajas\source\repos\Cipher-Challenge\Cipher\bin\Debug\net8.0\Cipher.dll
 C:\Users\rajas\source\repos\Cipher-Challenge\Cipher\bin\Debug\net8.0\Cipher.pdb
 C:\Users\rajas\source\repos\Cipher-Challenge\Cipher\obj\Debug\net8.0\Cipher.genruntimeconfig.cache
 C:\Users\rajas\source\repos\Cipher-Challenge\Cipher\obj\Debug\net8.0\ref\Cipher.dll
+C:\Users\rajas\source\repos\Cipher-Challenge\Cipher\obj\Debug\net8.0\Cipher.sourcelink.json

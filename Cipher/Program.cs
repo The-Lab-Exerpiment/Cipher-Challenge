@@ -100,6 +100,13 @@ namespace cipher
                     case "read":
                         cipher.ReadFile();
                         break;
+
+                    case "analyse":
+                        for (int i = 0; i < 26; i++)
+                        {
+                            Console.WriteLine($"{(char)(65 + i)}: {cipher.FrequencyAnalysis(65 + i) + cipher.FrequencyAnalysis(97 + i)}");
+                        }
+                        break;
                 }
 
                 cipher.PrintAlt();
