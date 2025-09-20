@@ -12,6 +12,7 @@ namespace cipher
     {
         private string cipherText;
         private string altText;
+        private string temp = "";
 
         public void InitCipher()
         {
@@ -22,8 +23,6 @@ namespace cipher
 
         public void RemoveFiller()
         {
-            string temp = "";
-
             for (int i = 0; i < altText.Length; i++)
             {
                 int letter = (int)altText[i];
@@ -35,6 +34,7 @@ namespace cipher
             }
 
             altText = temp;
+            ResetTemp();
         }
 
         public void AddFiller()
@@ -42,8 +42,6 @@ namespace cipher
             RemoveFiller();
 
             int setback = 0;
-            string temp = "";
-
             for (int i = 0; i < cipherText.Length; i++)
             {
                 int letter = (int)cipherText[i];
@@ -91,7 +89,6 @@ namespace cipher
         }
         private void Shift(int geoShift, int linShift, int wordGap, int wordOffset)
         {
-            string temp = "";
             RemoveFiller();
 
             if (wordGap <= 0)
@@ -201,7 +198,6 @@ namespace cipher
             int separate = int.Parse(Console.ReadLine());
 
             RemoveFiller();
-            string temp = "";
 
             for (int i = 0; i < altText.Length; i += separate)
             {
@@ -219,7 +215,6 @@ namespace cipher
         public double IOC(int split, int offset)
         {
             RemoveFiller();
-            string temp = "";
 
             for (int i = offset; i < altText.Length; i += split)
             {
@@ -281,7 +276,43 @@ namespace cipher
                 }
             }
 
+            AddFiller();
             return total;
+        }
+
+        public void ResetTemp()
+        {
+            temp = "";
+        }
+
+        public void SwitchColumns(int length, int col1, int col2)
+        {
+            RemoveFiller();
+
+            for (int i = 0; i < altText.Length; i += length)
+            {
+                for (int j = 0; j < length && i + j < altText.Length; j++)
+                {
+                    if (j == col1)
+                    {
+                        temp += altText[i + col2];
+                    }
+
+                    else if (j == col2)
+                    {
+                        temp += altText[i + col1];
+                    }
+
+                    else
+                    {
+                        temp += altText[i + j];
+                    }
+                }
+            }
+
+            altText = temp;
+
+            AddFiller();
         }
     };
 }

@@ -26,7 +26,7 @@ namespace cipher
                         cipher.AddFiller();
                         break;
 
-                    case "return":
+                    case "reset":
                         cipher.ReturnCipher();
                         break;
 
@@ -46,12 +46,12 @@ namespace cipher
                         Console.Write("Separation: ");
                         int split = int.Parse(Console.ReadLine());
 
-                        string temp = cipher.GetCipher();
+                        string placeholder = cipher.GetCipher();
 
                         for (int i = 0; i < split; i++)
                         {
                             Console.WriteLine(cipher.IOC(split, i));
-                            cipher.SetCipher(temp);
+                            cipher.SetCipher(placeholder);
                         }
                         break;
 
@@ -61,9 +61,26 @@ namespace cipher
 
                         Console.WriteLine(cipher.CheckPhrase(phrase));
                         break;
+
+                    case "switch column":
+                        Console.Write("Length of column: ");
+                        int length = int.Parse(Console.ReadLine());
+
+                        Console.Write("Index of column 1: ");
+                        int col1 = int.Parse(Console.ReadLine());
+
+                        Console.Write("Index of column 2: ");
+                        int col2 = int.Parse(Console.ReadLine());
+
+                        if (col1 <= length && col2 <= length)
+                        {
+                            cipher.SwitchColumns(length, col1 - 1, col2 - 1);
+                        }
+                        break;
                 }
 
                 cipher.PrintAlt();
+                cipher.ResetTemp();
             }
         }
     }
