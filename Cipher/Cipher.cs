@@ -369,7 +369,7 @@ namespace cipher
             return Round((double)count * 100 / TotalLetters());
         }
 
-        public double FrequencyAnalysis(int ascii)
+        public int FrequencyAnalysis(int ascii)
         {
             char chara = (char)ascii;
 
@@ -381,6 +381,27 @@ namespace cipher
             num += 0.5;
 
             return (int)num;
+        }
+
+        public int SelectiveFrequencyAnalysis(int length, int offset, int ascii)
+        {
+            RemoveFiller();
+            temp = altText;
+            altText = "";
+
+            for (int i = offset; i < temp.Length; i += length)
+            {
+                altText += temp[i];
+            }
+
+            int frequency = FrequencyAnalysis(ascii);
+            altText = temp;
+
+            ResetTemp();
+            AddFiller();
+            ResetTemp();
+
+            return frequency;
         }
     };
 }

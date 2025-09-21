@@ -104,7 +104,20 @@ namespace cipher
                     case "analyse":
                         for (int i = 0; i < 26; i++)
                         {
-                            Console.WriteLine($"{(char)(65 + i)}: {cipher.FrequencyAnalysis(65 + i) + cipher.FrequencyAnalysis(97 + i)}");
+                            Console.WriteLine($"{(char)(65 + i)}: {cipher.FrequencyAnalysis(65 + i) + cipher.FrequencyAnalysis(97 + i)}%");
+                        }
+                        break;
+                    case "select":
+                        Console.Write("Length of row: ");
+                        length = int.Parse(Console.ReadLine());
+
+                        Console.Write("Offset: ");
+                        int offset = int.Parse(Console.ReadLine());
+
+
+                        for (int i = 0; i < 26; i++)
+                        {
+                            Console.WriteLine($"{(char)(65 + i)}: {cipher.SelectiveFrequencyAnalysis(length, offset, 65 + i) + cipher.SelectiveFrequencyAnalysis(length, offset, 97 + i)}%");
                         }
                         break;
                 }
