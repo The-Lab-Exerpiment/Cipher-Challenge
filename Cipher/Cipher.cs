@@ -88,7 +88,7 @@ namespace cipher
 
             Shift(gShift, lShift, gap, offset);
         }
-        private void Shift(int geoShift, int linShift, int wordGap, int wordOffset)
+        public void Shift(int geoShift, int linShift, int wordGap, int wordOffset)
         {
             RemoveFiller();
 

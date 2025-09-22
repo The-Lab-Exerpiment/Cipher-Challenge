@@ -120,6 +120,13 @@ namespace cipher
                             Console.WriteLine($"{(char)(65 + i)}: {cipher.SelectiveFrequencyAnalysis(length, offset, 65 + i) + cipher.SelectiveFrequencyAnalysis(length, offset, 97 + i)}%");
                         }
                         break;
+
+                    case "cshift":
+                        Console.Write("Amount of shift: ");
+                        int shift = int.Parse(Console.ReadLine());
+
+                        cipher.Shift(1, shift, 1, 0);
+                        break;
                 }
 
                 cipher.PrintAlt();
