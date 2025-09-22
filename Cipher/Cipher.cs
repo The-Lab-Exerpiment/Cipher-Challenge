@@ -74,9 +74,6 @@ namespace cipher
 
         public void ShiftManual()
         {
-            Console.Write("Geometric shift: ");
-            int gShift = int.Parse(Console.ReadLine());
-
             Console.Write("Linear shift: ");
             int lShift = int.Parse(Console.ReadLine());
 
@@ -86,20 +83,15 @@ namespace cipher
             Console.Write("Offset: ");
             int offset = int.Parse(Console.ReadLine());
 
-            Shift(gShift, lShift, gap, offset);
+            Shift(lShift, gap, offset);
         }
-        public void Shift(int geoShift, int linShift, int wordGap, int wordOffset)
+        public void Shift(int linShift, int wordGap, int wordOffset)
         {
             RemoveFiller();
 
             if (wordGap <= 0)
             {
                 wordGap = 1;
-            }
-
-            if (geoShift <= 0)
-            {
-                geoShift = 1;
             }
 
             if (linShift < 0)
@@ -123,12 +115,12 @@ namespace cipher
 
                 if (ascii >= 65 && ascii < 91)
                 {
-                    temp += (char)(((ascii - 65) * geoShift + linShift) % 26 + 97);
+                    temp += (char)((ascii - 65 + linShift) % 26 + 97);
                 }
 
                 else if (ascii >= 97 && ascii < 123)
                 {
-                    temp += (char)(((ascii - 97) * geoShift + linShift) % 26 + 97);
+                    temp += (char)((ascii - 97 + linShift) % 26 + 97);
                 }
 
                 else

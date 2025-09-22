@@ -125,7 +125,7 @@ namespace cipher
                         Console.Write("Amount of shift: ");
                         int shift = int.Parse(Console.ReadLine());
 
-                        cipher.Shift(1, shift, 1, 0);
+                        cipher.Shift(shift, 1, 0);
                         break;
                 }
 
