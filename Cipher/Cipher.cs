@@ -509,5 +509,19 @@ namespace cipher
 
             return total;
         }
+
+        public void KeyWordShift(string key)
+        {
+            if (InABC(key))
+            {
+                for (int i = 0; i < key.Length; i++)
+                {
+                    Shift('Z' - key[i] + 1, key.Length, i);
+                    ResetTemp();
+                }
+            }
+
+            AddFiller();
+        }
     };
 }

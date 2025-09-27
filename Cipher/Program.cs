@@ -142,6 +142,13 @@ namespace cipher
 
                         Console.WriteLine($"Possible key: {cipher.FindKey(length)}");
                         break;
+
+                    case "kshift":
+                        Console.Write("Enter key: ");
+                        string key = Console.ReadLine().ToUpper();
+
+                        cipher.KeyWordShift(key);
+                        break;
                 }
 
                 cipher.PrintAlt();
