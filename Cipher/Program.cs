@@ -32,6 +32,7 @@ namespace cipher
 
                     case "shift":
                         cipher.ShiftManual();
+                        cipher.AddFiller();
                         break;
 
                     case "ioc":
@@ -102,10 +103,12 @@ namespace cipher
                         break;
 
                     case "analyse":
+                        cipher.RemoveFiller();
                         for (int i = 0; i < 26; i++)
                         {
                             Console.WriteLine($"{(char)(65 + i)}: {cipher.FrequencyAnalysis(65 + i) + cipher.FrequencyAnalysis(97 + i)}%");
                         }
+                        cipher.AddFiller();
                         break;
                     case "select":
                         Console.Write("Length of row: ");
@@ -126,10 +129,18 @@ namespace cipher
                         int shift = int.Parse(Console.ReadLine());
 
                         cipher.Shift(shift, 1, 0);
+                        cipher.AddFiller();
                         break;
 
                     case "sub":
                         cipher.Substitute();
+                        break;
+
+                    case "key":
+                        Console.Write("Length of row: ");
+                        length = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine($"Possible key: {cipher.FindKey(length)}");
                         break;
                 }
 

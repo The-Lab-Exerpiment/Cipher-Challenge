@@ -135,7 +135,6 @@ namespace cipher
             }
 
             altText = temp;
-            AddFiller();
         }
 
         public double IOC()
@@ -445,6 +444,70 @@ namespace cipher
                     Console.WriteLine($"\n{altText}\n");
                 }
             } while (swap != "");
+        }
+
+        public string FindKey(int split)
+        {
+            RemoveFiller();
+            string tempAlt = altText;
+
+            double[] englishFrequency = { 8.04, 1.53, 3.11, 3.96, 12.50, 2.34, 1.95, 5.41, 7.3, 0.16, 0.66, 4.13, 2.15, 7.10, 7.60, 2.02, 0.11, 6.14, 6.55, 9.25, 2.71, 1.00, 1.88, 0.10, 1.72, 0.10 };
+
+            string key = "";
+
+            for (int i = 0; i < split; i++)
+            {
+                altText = "";
+
+                for (int j = i; j < tempAlt.Length; j += split)
+                {
+                    altText += tempAlt[j];
+                }
+
+                char letter = ' ';
+                double max = 0;
+
+                for (int shift = 0; shift < 26; shift++)
+                {
+                    Shift(1, 1, 0);
+
+                    double[] frequency = new double[26];
+
+                    for (int j = 0; j < 26; j++)
+                    {
+                        frequency[j] = FrequencyAnalysis(65 + j) + FrequencyAnalysis(97 + j);
+                    }
+
+                    double rank = DotProduct(frequency, englishFrequency, 26);
+
+                    if (rank > max)
+                    {
+                        letter = (char)('z' - shift);
+                        max = rank;
+                    }
+
+                    ResetTemp();
+                }
+
+                key += letter;
+            }
+
+            altText = tempAlt;
+            AddFiller();
+
+            return key;
+        }
+
+        public double DotProduct(double[] vector1, double[] vector2, int length)
+        {
+            double total = 0;
+
+            for (int i = 0; i < length; i++)
+            {
+                total += vector1[i] * vector2[i];
+            }
+
+            return total;
         }
     };
 }
