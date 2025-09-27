@@ -35,7 +35,7 @@ namespace cipher
                         break;
 
                     case "ioc":
-                        Console.WriteLine(cipher.IOC());
+                        Console.WriteLine($"{cipher.IOC() * 100}%");
                         break;
 
                     case "split":
@@ -51,7 +51,7 @@ namespace cipher
 
                         for (int i = 0; i < split; i++)
                         {
-                            Console.WriteLine(cipher.IOC(split, i));
+                            Console.WriteLine($"{i + 1}/{split} : {cipher.IOC(split, i) * 100}%");
                             cipher.SetCipher(placeholder);
                         }
 
@@ -126,6 +126,10 @@ namespace cipher
                         int shift = int.Parse(Console.ReadLine());
 
                         cipher.Shift(shift, 1, 0);
+                        break;
+
+                    case "sub":
+                        cipher.Substitute();
                         break;
                 }
 

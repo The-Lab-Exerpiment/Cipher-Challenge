@@ -185,6 +185,20 @@ namespace cipher
             return (ascii >= 65 && ascii < 91) || (ascii >= 97 && ascii < 123);
         }
 
+        public static bool InABC(string text)
+        {
+            foreach (char letter in text)
+            {
+                int ascii = letter;
+                if (!InABC(ascii))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public void Separate()
         {
             Console.Write("How much to separate by: ");
@@ -394,6 +408,43 @@ namespace cipher
             ResetTemp();
 
             return frequency;
+        }
+
+        public void Substitute()
+        {
+            RemoveFiller();
+            AddFiller();
+            string swap;
+
+            do
+            {
+                Console.Write("Letters to swap: ");
+                swap = Console.ReadLine().ToLower();
+
+                if (swap.Length == 2 && InABC(swap))
+                {
+                    ResetTemp();
+
+                    foreach (char letter in altText)
+                    {
+                        int ascii = letter;
+                        int identity = swap[0];
+
+                        if (ascii + 32 == identity)
+                        {
+                            temp += swap[1];
+                        }
+
+                        else
+                        {
+                            temp += letter;
+                        }
+                    }
+
+                    altText = temp;
+                    Console.WriteLine($"\n{altText}\n");
+                }
+            } while (swap != "");
         }
     };
 }
