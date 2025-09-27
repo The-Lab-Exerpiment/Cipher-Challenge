@@ -356,7 +356,7 @@ namespace cipher
 
         public void ReadFile()
         {
-            cipherText = File.ReadAllText("Resources/cipher.txt");
+            cipherText = File.ReadAllText("Resources/cipher.txt").ToUpper();
             altText = cipherText;
         }
 
