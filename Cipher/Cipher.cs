@@ -595,5 +595,29 @@ namespace cipher
 
             File.WriteAllText(filePath, temp);
         }
+
+        public void ReadTetragrams(string filePath)
+        {
+            temp = File.ReadAllText(filePath);
+            string num = "";
+            int count = 0;
+
+            foreach (char letter in temp)
+            {
+                if (letter == '\n')
+                {
+                    tetragrams[(count / (26 * 26 * 26)) % 26, (count / (26 * 26)) % 26, (count / 26) % 26, count % 26] = int.Parse(num);
+                    num = "";
+                    count++;
+                }
+
+                else
+                {
+                    num += letter;
+                }
+            }
+
+            ResetTemp();
+        }
     };
 }

@@ -7,6 +7,7 @@ namespace cipher
         static void Main(string[] args)
         {
             Cipher cipher = new Cipher();
+            cipher.ReadTetragrams("Data/tetragrams.txt");
 
             while (true)
             {
