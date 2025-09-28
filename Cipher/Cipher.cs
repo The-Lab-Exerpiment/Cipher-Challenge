@@ -564,5 +564,17 @@ namespace cipher
                 tetragrams[train[i] - 65, train[i + 1] - 65, train[i + 2] - 65, train[i + 3] - 65]++;
             }
         }
+
+        public int Tetragram(string tetragram)
+        {
+            tetragram = tetragram.ToUpper();
+
+            if (tetragram.Length == 4 && InABC(tetragram))
+            {
+                return tetragrams[tetragram[0] - 65, tetragram[1] - 65, tetragram[2] - 65, tetragram[3] - 65];
+            }
+
+            return -1;
+        }
     };
 }

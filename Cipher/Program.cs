@@ -153,6 +153,12 @@ namespace cipher
                     case "train":
                         cipher.TrainTetragrams("Resources/train.txt");
                         break;
+
+                    case "get tetragram":  // dev tool, remove once testing is over
+                        Console.Write("Enter tetragram: ");
+                        string tetra = Console.ReadLine();
+                        Console.WriteLine(cipher.Tetragram(tetra).ToString());
+                        break;
                 }
 
                 cipher.PrintAlt();
