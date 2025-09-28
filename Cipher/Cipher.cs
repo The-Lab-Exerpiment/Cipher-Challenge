@@ -539,15 +539,15 @@ namespace cipher
 
         public void ResetTetragrams()
         {
-            for (int i0 = 0; i0 < 26; i0++)
+            for (int i3 = 0; i3 < 26; i3++)
             {
-                for (int i1 = 0; i1 < 26; i1++)
+                for (int i2 = 0; i2 < 26; i2++)
                 {
-                    for (int i2 = 0; i2 < 26; i2++)
+                    for (int i1 = 0; i1 < 26; i1++)
                     {
-                        for (int i3 = 0; i3 < 26; i3++)
+                        for (int i0 = 0; i0 < 26; i0++)
                         {
-                            tetragrams[i0, i1, i2, i3] = 0;
+                            tetragrams[i3, i2, i1, i0] = 0;
                         }
                     }
                 }
@@ -575,6 +575,25 @@ namespace cipher
             }
 
             return -1;
+        }
+
+        public void SaveTetragrams(string filePath)
+        {
+            for (int i3 = 0; i3 < 26; i3++)
+            {
+                for (int i2 = 0; i2 < 26; i2++)
+                {
+                    for (int i1 = 0; i1 < 26; i1++)
+                    {
+                        for (int i0 = 0; i0 < 26; i0++)
+                        {
+                            temp += tetragrams[i3, i2, i1, i0].ToString() + "\n";
+                        }
+                    }
+                }
+            }
+
+            File.WriteAllText(filePath, temp);
         }
     };
 }

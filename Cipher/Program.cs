@@ -159,6 +159,10 @@ namespace cipher
                         string tetra = Console.ReadLine();
                         Console.WriteLine(cipher.Tetragram(tetra).ToString());
                         break;
+
+                    case "save":
+                        cipher.SaveTetragrams("Data/tetragrams.txt");
+                        break;
                 }
 
                 cipher.PrintAlt();
