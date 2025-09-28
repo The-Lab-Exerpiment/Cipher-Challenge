@@ -43,7 +43,7 @@ namespace cipher
                         cipher.Separate();
                         break;
 
-                    case "ioc split":
+                    case "iocs":
                         Console.Write("Separation: ");
                         int split = int.Parse(Console.ReadLine());
 
@@ -148,6 +148,10 @@ namespace cipher
                         string key = Console.ReadLine().ToUpper();
 
                         cipher.KeyWordShift(key);
+                        break;
+
+                    case "train":
+                        cipher.TrainTetragrams("Resources/train.txt");
                         break;
                 }
 

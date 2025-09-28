@@ -14,6 +14,7 @@ namespace cipher
         private string cipherText;
         private string altText;
         private string temp = "";
+        private int[,,,] tetragrams = new int[26, 26, 26, 26];
 
         public void InitCipher()
         {
@@ -522,6 +523,46 @@ namespace cipher
             }
 
             AddFiller();
+        }
+
+        public string RemoveFiller(string text)
+        {
+            string ogAltText = altText;
+            altText = text;
+
+            RemoveFiller();
+            text = altText;
+            altText = ogAltText;
+
+            return text;
+        }
+
+        public void ResetTetragrams()
+        {
+            for (int i0 = 0; i0 < 26; i0++)
+            {
+                for (int i1 = 0; i1 < 26; i1++)
+                {
+                    for (int i2 = 0; i2 < 26; i2++)
+                    {
+                        for (int i3 = 0; i3 < 26; i3++)
+                        {
+                            tetragrams[i0, i1, i2, i3] = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void TrainTetragrams(string filePath)
+        {
+            string train = RemoveFiller(File.ReadAllText(filePath)).ToUpper();
+            ResetTetragrams();
+
+            for (int i = 0; i < train.Length - 3; i++)
+            {
+                tetragrams[train[i] - 65, train[i + 1] - 65, train[i + 2] - 65, train[i + 3] - 65]++;
+            }
         }
     };
 }
