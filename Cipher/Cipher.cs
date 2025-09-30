@@ -619,5 +619,22 @@ namespace cipher
 
             ResetTemp();
         }
+
+        public void FitnessTest(int length)
+        {
+            double fitness = -99999;
+
+            string key = "";
+
+            for (int i = 0; i < length; i++)
+            {
+                key += "A";
+            }
+
+            foreach (char letter in altText)
+            {
+
+            }
+        }
     };
 }
