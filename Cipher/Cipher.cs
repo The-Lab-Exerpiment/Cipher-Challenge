@@ -620,7 +620,7 @@ namespace cipher
             ResetTemp();
         }
 
-        public void FitnessTest(int length)
+        public void FitnessKey(int length)
         {
             double fitness = -99999;
 
@@ -631,10 +631,72 @@ namespace cipher
                 key += "A";
             }
 
-            foreach (char letter in altText)
-            {
+            string newKey = "";
 
+            do
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    char best = key[i];
+
+                    for (int shift = 0; shift < 26; shift++)
+                    {
+                        double newFitness = 0;
+
+                        for (int i1 = 0; i1 < 26; i1++)
+                        {
+                            for (int i2 = 0; i2 < 26; i2++)
+                            {
+                                for (int i3 = 0; i3 < 26; i3++)
+                                {
+                                    for (int i4 = 0; i4 < 26; i4++)
+                                    {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } while (key != newKey);
+        }
+
+        public int CountTetragram(string tetragram)
+        {
+            int count = 0;
+
+            if (tetragram.Length == 4 && InABC(tetragram))
+            {
+                tetragram = tetragram.ToUpper();
+                RemoveFiller();
+                altText = altText.ToUpper();
+
+                for (int i = 0; i < altText.Length - 3; i++)
+                {
+                    if (tetragram[0] == altText[i] && tetragram[1] == altText[i + 1] && tetragram[2] == altText[i + 2] && tetragram[3] == altText[i + 3])
+                    {
+                        count++;
+                    }
+                }
+
+                AddFiller();
             }
+
+            return count;
+        }
+
+        public int CountTetragram(int i1, int i2, int i3, int i4)
+        {
+            int count = 0;
+
+            for (int i = 0; i < altText.Length - 3; i++)
+            {
+                if (i1 + 65 == altText[i] && i2 + 65 == altText[i + 1] && i3 + 65 == altText[i + 2] && i4 + 65 == altText[i + 3])
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
     };
 }

@@ -164,6 +164,12 @@ namespace cipher
                     case "save":
                         cipher.SaveTetragrams("Data/tetragrams.txt");
                         break;
+
+                    case "count tetra":
+                        Console.Write("Enter tetragram to find in text: ");
+                        tetra = Console.ReadLine();
+                        Console.WriteLine(cipher.CountTetragram(tetra).ToString());
+                        break;
                 }
 
                 cipher.PrintAlt();
