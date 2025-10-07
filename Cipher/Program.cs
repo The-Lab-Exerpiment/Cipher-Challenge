@@ -170,6 +170,12 @@ namespace cipher
                         tetra = Console.ReadLine();
                         Console.WriteLine(cipher.CountTetragram(tetra).ToString());
                         break;
+
+                    case "fitkey":
+                        Console.Write("Length of key: ");
+                        length = int.Parse(Console.ReadLine());
+                        Console.WriteLine(cipher.FitnessKey(length));
+                        break;
                 }
 
                 cipher.PrintAlt();

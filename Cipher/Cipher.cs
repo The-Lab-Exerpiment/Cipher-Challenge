@@ -620,44 +620,63 @@ namespace cipher
             ResetTemp();
         }
 
-        public void FitnessKey(int length)
+        public string FitnessKey(int length)
         {
-            double fitness = -99999;
+            string ogAltText = altText;
 
-            string key = "";
+            double fitness = double.MinValue;
+
+            string tempKey = "";
 
             for (int i = 0; i < length; i++)
             {
-                key += "A";
+                tempKey += "A";
             }
 
-            string newKey = "";
+            string key;
 
             do
             {
+                key = tempKey;
+                KeyWordShift(key);
+                ResetTemp();
+
+                tempKey = "";
+
                 for (int i = 0; i < length; i++)
                 {
                     char best = key[i];
 
                     for (int shift = 0; shift < 26; shift++)
                     {
-                        double newFitness = 0;
-
-                        for (int i1 = 0; i1 < 26; i1++)
+                        if (Fitness() > fitness)
                         {
-                            for (int i2 = 0; i2 < 26; i2++)
-                            {
-                                for (int i3 = 0; i3 < 26; i3++)
-                                {
-                                    for (int i4 = 0; i4 < 26; i4++)
-                                    {
-                                    }
-                                }
-                            }
+                            fitness = Fitness();
+                            best = (char)((key[i] + -'A' + shift) % 26 + 'A');
                         }
+
+                        Shift(1, length, i);
+                        ResetTemp();
                     }
+
+                    tempKey += best;
+
+                    altText = ogAltText;
+                    string newKey = tempKey;
+
+                    for (int j = i + 1; j < length; j++)
+                    {
+                        newKey += key[j];
+                    }
+
+                    KeyWordShift(newKey);
                 }
-            } while (key != newKey);
+
+                altText = ogAltText;
+
+            } while (key != tempKey);
+
+            return key;
         }
 
         public int CountTetragram(string tetragram)
@@ -697,6 +716,27 @@ namespace cipher
             }
 
             return count;
+        }
+
+        public double Fitness()
+        {
+            double fitness = 0;
+
+            for (int i1 = 0; i1 < 26; i1++)
+            {
+                for (int i2 = 0; i2 < 26; i2++)
+                {
+                    for (int i3 = 0; i3 < 26; i3++)
+                    {
+                        for (int i4 = 0; i4 < 26; i4++)
+                        {
+                            fitness += Math.Log(CountTetragram(i1, i2, i3, i4));
+                        }
+                    }
+                }
+            }
+
+            return fitness;
         }
     };
 }
