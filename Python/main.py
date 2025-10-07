@@ -10,3 +10,6 @@ while running:
         
     elif cmd == "filter": # remove after done with testing
         print(td.remove_filler("Resources/train.txt"))
+        
+    elif cmd == "train words":
+        td.train_words("Resources/train.txt", "Resources/words.txt")
