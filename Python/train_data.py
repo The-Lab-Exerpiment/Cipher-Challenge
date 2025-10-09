@@ -1,4 +1,5 @@
 from math import log
+import stats as st
 
 def int_to_letter(num):
     return chr(ord('A') + num)
@@ -112,17 +113,13 @@ def get_mono_frequencies(filename):
     
     monolist = open(filename, 'r').read().split('\n')
     
-    total = 0
-    
     for item in monolist:
         item = item.split(' ')
         
         if len(item) == 2:
             mono_frequencies[item[0]] = int(item[1])
-            total += int(item[1])
             
-    for mono in mono_frequencies:
-        mono_frequencies[mono] /= total
+    mono_frequencies = st.normalize_dict(mono_frequencies)
         
     return mono_frequencies
 
