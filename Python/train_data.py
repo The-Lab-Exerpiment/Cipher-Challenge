@@ -70,3 +70,22 @@ def get_word_frequencies(filename):
             word_frequency[item[0]] = int(item[1])
         
     return word_frequency
+
+def train_mono_frequencies(filename, targetfile):
+    mono_frequencies = {}
+    
+    text = remove_filler(filename)
+    
+    for char in range(0, 26):
+        mono_frequencies[chr(ord('A') + char)] = 0
+        
+    for letter in text:
+        if letter in mono_frequencies:
+            mono_frequencies[letter] += 1
+            
+    open(targetfile, 'w').write("")
+    
+    target = open(targetfile, 'a');
+    
+    for char in mono_frequencies:
+        target.write(f"{char} {mono_frequencies[char]}\n")

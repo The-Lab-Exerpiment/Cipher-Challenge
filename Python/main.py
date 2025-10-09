@@ -1,6 +1,6 @@
 import train_data as td
         
-word_frequencies = td.get_word_frequencies("Data/word_frequency.txt")
+words = td.get_word_frequencies("Data/word_frequency.txt")
 
 running = True
 
@@ -25,8 +25,11 @@ while running:
     elif cmd == "word frequ":
         word = input("Enter word to find frequency of: ").upper()
         
-        if word in word_frequencies:
-            print(f"{word}: {word_frequencies[word]}")
+        if word in words:
+            print(f"{word}: {words[word]}")
             
         else:
             print("Word not found")
+            
+    elif cmd == "train mono":
+        td.train_mono_frequencies("Resources/train.txt", "Data/mono_frequency.txt")
