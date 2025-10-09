@@ -4,6 +4,8 @@ words = td.get_word_frequencies("Data/word_frequency.txt")
 
 monos = td.get_mono_frequencies("Data/mono_frequency.txt")
 
+tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")
+
 running = True
 
 while running:
@@ -50,3 +52,6 @@ while running:
             
     elif cmd == "train tetra":
         td.train_tetra_frequency("Resources/train.txt", "Data/tetra_frequency.txt")
+        
+    elif cmd == "get tetra":
+        tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")

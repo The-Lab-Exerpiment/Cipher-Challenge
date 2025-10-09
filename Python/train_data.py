@@ -134,6 +134,19 @@ def train_tetra_frequency(filename, targetfile):
                     
     target.close()
     
+def get_tetra_frequencies(filename):
+    tetra_frequencies = {}
+    
+    tetralist = open(filename, 'r').read().split('\n')
+    
+    for item in tetralist:
+        item = item.split(' ')
+        
+        if len(item) == 2:
+            tetra_frequencies[item[0]] = int(item[1])
+            
+    return tetra_frequencies
+    
 def int_to_letter(num):
     return chr(ord('A') + num)
 
