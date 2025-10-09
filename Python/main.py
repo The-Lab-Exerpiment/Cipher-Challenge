@@ -47,3 +47,6 @@ while running:
                   
         else:
             print("Monogram not found")
+            
+    elif cmd == "train tetra":
+        td.train_tetra_frequency("Resources/train.txt", "Data/tetra_frequency.txt")

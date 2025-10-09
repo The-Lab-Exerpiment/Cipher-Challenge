@@ -1,4 +1,4 @@
-def remove_filler(filename):
+def remove_filler(filename, include_hyphens=True, include_spaces=True):
     text = open(filename, 'r').read().upper()
     
     newtext = ""
@@ -10,11 +10,11 @@ def remove_filler(filename):
             newtext += letter
             hyphenated = True
         
-        elif letter == ' ' or letter == '\n':
+        elif (letter == ' ' or letter == '\n') and include_spaces:
             newtext += ' '
             hyphenated = False
             
-        elif letter == '-' and hyphenated:
+        elif letter == '-' and hyphenated and include_hyphens:
             newtext += letter
         
     return newtext
@@ -58,6 +58,8 @@ def train_word_frequency(filename, targetfile):
     for word in word_frequency:
         target.write(f"{word} {word_frequency[word]}\n")
         
+    target.close()
+        
 def get_word_frequencies(filename):
     word_frequency = {}
     
@@ -85,10 +87,12 @@ def train_mono_frequency(filename, targetfile):
             
     open(targetfile, 'w').write("")
     
-    target = open(targetfile, 'a');
+    target = open(targetfile, 'a')
     
     for char in mono_frequencies:
         target.write(f"{char} {mono_frequencies[char]}\n")
+        
+    target.close()
         
 def get_mono_frequencies(filename):
     mono_frequencies = {}
@@ -102,3 +106,41 @@ def get_mono_frequencies(filename):
             mono_frequencies[item[0]] = int(item[1])
             
     return mono_frequencies
+
+def train_tetra_frequency(filename, targetfile):
+    tetra_frequencies = {}
+    
+    text = remove_filler(filename, include_hyphens=False, include_spaces=False)
+    
+    for ch1 in range(26):
+        for ch2 in range(26):
+            for ch3 in range(26):
+                for ch4 in range(26):
+                    tetra_frequencies[ints_to_string([ch1, ch2, ch3, ch4])] = 0
+                    
+    for i in range(len(text) - 3):
+        tetra_frequencies[text[i] + text[i+1] + text[i+2] + text[i+3]] += 1
+        
+    open(targetfile, 'w').write("")
+    
+    target = open(targetfile, 'a')
+        
+    for ch1 in range(26):
+        for ch2 in range(26):
+            for ch3 in range(26):
+                for ch4 in range(26):
+                    tetra = ints_to_string([ch1, ch2, ch3, ch4])
+                    target.write(f"{tetra} {tetra_frequencies[tetra]}\n")
+                    
+    target.close()
+    
+def int_to_letter(num):
+    return chr(ord('A') + num)
+
+def ints_to_string(nums):
+    string = ""
+    
+    for num in nums:
+        string += int_to_letter(num)
+        
+    return string
