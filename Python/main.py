@@ -6,6 +6,8 @@ monos = td.get_mono_frequencies("Data/mono_frequency.txt")
 
 tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")
 
+logtetras = td.get_logtetra_frequencies("Data/tetra_frequency.txt")
+
 running = True
 
 while running:
@@ -46,3 +48,6 @@ while running:
         
     elif cmd == "tetra frequ":
         td.print_frequency(tetras, "tetragram")
+        
+    elif cmd == "logtetra frequ":
+        td.print_frequency(logtetras, "tetragram logarithm")

@@ -1,3 +1,5 @@
+from math import log
+
 def int_to_letter(num):
     return chr(ord('A') + num)
 
