@@ -57,3 +57,16 @@ def train_word_frequency(filename, targetfile):
     
     for word in word_frequency:
         target.write(f"{word} {word_frequency[word]}\n")
+        
+def get_word_frequencies(filename):
+    word_frequency = {}
+    
+    wordlist = open(filename, 'r').read().split('\n')
+    
+    for item in wordlist:
+        item = item.split(' ')
+        
+        if len(item) == 2:
+            word_frequency[item[0]] = int(item[1])
+        
+    return word_frequency

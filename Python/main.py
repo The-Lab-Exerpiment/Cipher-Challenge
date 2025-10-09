@@ -1,4 +1,6 @@
 import train_data as td
+        
+word_frequencies = td.get_word_frequencies("Resources/word_frequency.txt")
 
 running = True
 
@@ -16,3 +18,6 @@ while running:
         
     elif cmd == "train word frequ":
         td.train_word_frequency("Resources/train.txt", "Resources/word_frequency.txt")
+        
+    elif cmd == "get words":
+        word_frequencies = td.get_word_frequencies("Resources/word_frequency.txt")
