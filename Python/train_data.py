@@ -71,7 +71,7 @@ def get_word_frequencies(filename):
         
     return word_frequency
 
-def train_mono_frequencies(filename, targetfile):
+def train_mono_frequency(filename, targetfile):
     mono_frequencies = {}
     
     text = remove_filler(filename)
@@ -89,3 +89,16 @@ def train_mono_frequencies(filename, targetfile):
     
     for char in mono_frequencies:
         target.write(f"{char} {mono_frequencies[char]}\n")
+        
+def get_mono_frequencies(filename):
+    mono_frequencies = {}
+    
+    monolist = open(filename, 'r').read().split('\n')
+    
+    for item in monolist:
+        item = item.split(' ')
+        
+        if len(item) == 2:
+            mono_frequencies[item[0]] = int(item[1])
+            
+    return mono_frequencies

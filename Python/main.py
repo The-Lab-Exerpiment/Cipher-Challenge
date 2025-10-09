@@ -2,6 +2,8 @@ import train_data as td
         
 words = td.get_word_frequencies("Data/word_frequency.txt")
 
+monos = td.get_mono_frequencies("Data/mono_frequency.txt")
+
 running = True
 
 while running:
@@ -20,7 +22,7 @@ while running:
         td.train_word_frequency("Resources/train.txt", "Data/word_frequency.txt")
         
     elif cmd == "get words":
-        word_frequencies = td.get_word_frequencies("Data/word_frequency.txt")
+        words = td.get_word_frequencies("Data/word_frequency.txt")
         
     elif cmd == "word frequ":
         word = input("Enter word to find frequency of: ").upper()
@@ -32,4 +34,16 @@ while running:
             print("Word not found")
             
     elif cmd == "train mono":
-        td.train_mono_frequencies("Resources/train.txt", "Data/mono_frequency.txt")
+        td.train_mono_frequency("Resources/train.txt", "Data/mono_frequency.txt")
+        
+    elif cmd == "get mono":
+        monos = td.get_mono_frequencies("Data/mono_frequency.txt")
+        
+    elif cmd == "mono frequ":
+        mono = input("Enter monogram to find frequency of: ").upper()
+        
+        if mono in monos:
+            print(f"{mono}: {monos[mono]}")
+                  
+        else:
+            print("Monogram not found")
