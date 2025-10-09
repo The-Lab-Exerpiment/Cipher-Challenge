@@ -169,3 +169,12 @@ def get_logtetra_frequencies(filename):
             tetra_frequencies[tetra] = log(tetra_frequencies[tetra])
             
     return tetra_frequencies
+
+def get_frequency(items, name):
+    item = input(f"Enter {name} to find frequency of: ").upper()
+    
+    if item in items:
+        print(f"{item}: {items[item]}")
+        
+    else:
+        print(f"{name.capitalize()} not found")

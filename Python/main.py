@@ -55,3 +55,6 @@ while running:
         
     elif cmd == "get tetra":
         tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")
+        
+    elif cmd == "tetra frequ":
+        td.get_frequency(tetras, "tetragram")
