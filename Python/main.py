@@ -14,7 +14,7 @@ while running:
     if cmd == "quit":
         running = False
         
-    elif cmd == "filter": # remove after done with testing
+    elif cmd == "filter":
         print(td.remove_filler("Resources/train.txt"))
         
     elif cmd == "train words":
@@ -27,13 +27,7 @@ while running:
         words = td.get_word_frequencies("Data/word_frequency.txt")
         
     elif cmd == "word frequ":
-        word = input("Enter word to find frequency of: ").upper()
-        
-        if word in words:
-            print(f"{word}: {words[word]}")
-            
-        else:
-            print("Word not found")
+        td.print_frequency(words, "word")
             
     elif cmd == "train mono":
         td.train_mono_frequency("Resources/train.txt", "Data/mono_frequency.txt")
@@ -42,13 +36,7 @@ while running:
         monos = td.get_mono_frequencies("Data/mono_frequency.txt")
         
     elif cmd == "mono frequ":
-        mono = input("Enter monogram to find frequency of: ").upper()
-        
-        if mono in monos:
-            print(f"{mono}: {monos[mono]}")
-                  
-        else:
-            print("Monogram not found")
+        td.print_frequency(monos, "monogram")
             
     elif cmd == "train tetra":
         td.train_tetra_frequency("Resources/train.txt", "Data/tetra_frequency.txt")
@@ -57,4 +45,4 @@ while running:
         tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")
         
     elif cmd == "tetra frequ":
-        td.get_frequency(tetras, "tetragram")
+        td.print_frequency(tetras, "tetragram")

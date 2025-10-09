@@ -170,7 +170,7 @@ def get_logtetra_frequencies(filename):
             
     return tetra_frequencies
 
-def get_frequency(items, name):
+def print_frequency(items, name):
     item = input(f"Enter {name} to find frequency of: ").upper()
     
     if item in items:
