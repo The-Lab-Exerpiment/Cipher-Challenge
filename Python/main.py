@@ -1,4 +1,5 @@
 import train_data as td
+import stats as st
         
 words = td.get_word_frequencies("Data/word_frequency.txt")
 
