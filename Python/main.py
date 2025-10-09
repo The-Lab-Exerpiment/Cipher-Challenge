@@ -5,7 +5,7 @@ word_frequencies = td.get_word_frequencies("Resources/word_frequency.txt")
 running = True
 
 while running:
-    cmd = input("What is your command? ")
+    cmd = input("\nWhat is your command? ")
     
     if cmd == "quit":
         running = False
@@ -21,3 +21,12 @@ while running:
         
     elif cmd == "get words":
         word_frequencies = td.get_word_frequencies("Resources/word_frequency.txt")
+        
+    elif cmd == "word frequ":
+        word = input("Enter word to find frequency of: ").upper()
+        
+        if word in word_frequencies:
+            print(f"{word}: {word_frequencies[word]}")
+            
+        else:
+            print("Word not found")
