@@ -112,12 +112,18 @@ def get_mono_frequencies(filename):
     
     monolist = open(filename, 'r').read().split('\n')
     
+    total = 0
+    
     for item in monolist:
         item = item.split(' ')
         
         if len(item) == 2:
             mono_frequencies[item[0]] = int(item[1])
+            total += int(item[1])
             
+    for mono in mono_frequencies:
+        mono_frequencies[mono] /= total
+        
     return mono_frequencies
 
 def train_tetra_frequency(filename, targetfile):
