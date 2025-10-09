@@ -1,3 +1,14 @@
+def int_to_letter(num):
+    return chr(ord('A') + num)
+
+def ints_to_string(nums):
+    string = ""
+    
+    for num in nums:
+        string += int_to_letter(num)
+        
+    return string
+
 def remove_filler(filename, include_hyphens=True, include_spaces=True):
     text = open(filename, 'r').read().upper()
     
@@ -146,14 +157,15 @@ def get_tetra_frequencies(filename):
             tetra_frequencies[item[0]] = int(item[1])
             
     return tetra_frequencies
-    
-def int_to_letter(num):
-    return chr(ord('A') + num)
 
-def ints_to_string(nums):
-    string = ""
+def get_logtetra_frequencies(filename):
+    tetra_frequencies = get_tetra_frequencies(filename)
     
-    for num in nums:
-        string += int_to_letter(num)
+    for tetra in tetra_frequencies:
+        if tetra_frequencies[tetra] == 0:
+            tetra_frequencies[tetra] = -999999
         
-    return string
+        else:
+            tetra_frequencies[tetra] = log(tetra_frequencies[tetra])
+            
+    return tetra_frequencies
