@@ -13,3 +13,6 @@ while running:
         
     elif cmd == "train words":
         td.train_words("Resources/train.txt", "Resources/words.txt")
+        
+    elif cmd == "train word frequ":
+        td.train_word_frequency("Resources/train.txt", "Resources/word_frequency.txt")
