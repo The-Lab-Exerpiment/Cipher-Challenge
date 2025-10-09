@@ -1,6 +1,6 @@
 import train_data as td
         
-word_frequencies = td.get_word_frequencies("Resources/word_frequency.txt")
+word_frequencies = td.get_word_frequencies("Data/word_frequency.txt")
 
 running = True
 
@@ -14,13 +14,13 @@ while running:
         print(td.remove_filler("Resources/train.txt"))
         
     elif cmd == "train words":
-        td.train_words("Resources/train.txt", "Resources/words.txt")
+        td.train_words("Resources/train.txt", "Data/words.txt")
         
     elif cmd == "train word frequ":
-        td.train_word_frequency("Resources/train.txt", "Resources/word_frequency.txt")
+        td.train_word_frequency("Resources/train.txt", "Data/word_frequency.txt")
         
     elif cmd == "get words":
-        word_frequencies = td.get_word_frequencies("Resources/word_frequency.txt")
+        word_frequencies = td.get_word_frequencies("Data/word_frequency.txt")
         
     elif cmd == "word frequ":
         word = input("Enter word to find frequency of: ").upper()
