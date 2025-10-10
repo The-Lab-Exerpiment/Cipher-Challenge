@@ -85,6 +85,7 @@ def entropy(text):
     entropy = 0
     
     for char in mono_frequencies:
-        entropy -= mono_frequencies[char] * log(mono_frequencies[char], 26)
+        if(mono_frequencies[char] != 0):
+            entropy -= mono_frequencies[char] * log(mono_frequencies[char], 26)
         
     return entropy
