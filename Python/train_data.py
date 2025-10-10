@@ -183,3 +183,15 @@ def print_frequency(items, name):
         
     else:
         print(f"{name.capitalize()} not found")
+        
+def get_mono_text(text):
+    mono_frequencies = {}
+    
+    for char in range(0, 26):
+        mono_frequencies[chr(ord('A') + char)] = 0
+        
+    for letter in text:
+        if letter in mono_frequencies:
+            mono_frequencies[letter] += 1
+            
+    return mono_frequencies
