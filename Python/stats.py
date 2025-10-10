@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, log
 
 def variation(measured, expected):
     variation = 0
@@ -43,3 +43,15 @@ def magnitude(vec):
 def vector_cos(vec1, vec2):
     if len(vec1) == len(vec2):
         return dot_product(vec1, vec2)/(magnitude(vec1) * magnitude(vec2))
+    
+def tetra_fitness(text, tetra_frequencies):
+    fitness = 0
+    
+    for i in range(len(text)-3):
+        if tetra_frequencies[text[i:i+4]] == 0:
+            fitness -= 999999999999
+            
+        else:
+            fitness += log(tetra_frequencies[text[i:i+4]])
+            
+    return fitness/(len(text)-3)
