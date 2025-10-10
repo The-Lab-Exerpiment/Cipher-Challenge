@@ -1,3 +1,5 @@
+from math import sqrt
+
 def variation(measured, expected):
     variation = 0
     
@@ -34,3 +36,10 @@ def dot_product(vec1, vec2):
             total += vec1[i] * vec2[i]
             
     return total
+
+def magnitude(vec):
+    return sqrt(dot_product(vec1, vec1))
+
+def vector_cos(vec1, vec2):
+    if len(vec1) == len(vec2):
+        return dot_product(vec1, vec2)/(magnitude(vec1) * magnitude(vec2))
