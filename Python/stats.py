@@ -68,4 +68,4 @@ def IOC(text):
     for char in mono_frequencies:
         ioc += (mono_frequencies[char] * (mono_frequencies[char]-1))/(len(text) * (len(text)-1))
         
-    return ioc*26
+    return ioc*26/1.75
