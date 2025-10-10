@@ -1,6 +1,8 @@
 import train_data as td
 import stats as st
 
+import matplotlib.pyplot as plt
+
 cipher = open("Resources/ciphertext.txt", 'r').read().upper()
         
 words = td.get_word_frequencies("Data/word_frequency.txt")
@@ -44,6 +46,22 @@ while running:
         
     elif cmd == "mono frequ":
         td.print_frequency(monos, "monogram")
+        
+    elif cmd == "plot mono":
+        alphabet = []
+        
+        for char in range(26):
+            alphabet.append(chr(ord('A') + char))
+            
+        plt.subplot(2, 1, 1)
+        plt.bar(alphabet, st.monolist(st.normalize_dict(monos)), color="blue")
+        plt.title("English")
+        
+        plt.subplot(2, 1, 2)
+        plt.bar(alphabet, st.monolist(st.normalize_dict(td.get_mono_text(cipher))), color="green")
+        plt.title("Ciphertext")
+        
+        plt.show()
             
     elif cmd == "train tetra":
         td.train_tetra_frequency("Resources/train.txt", "Data/tetra_frequency.txt")
