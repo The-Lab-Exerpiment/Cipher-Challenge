@@ -24,3 +24,13 @@ def monolist(items):
         monolist.append(items[chr(ord('A') + char)])
         
     return monolist
+
+def dot_product(vec1, vec2):
+    total = 0
+    
+    if len(vec1) == len(vec2):
+        
+        for i in range(len(vec1)):
+            total += vec1[i] * vec2[i]
+            
+    return total
