@@ -16,3 +16,11 @@ def normalize_dict(items):
         items[item] /= total;
         
     return items
+
+def monolist(items):
+    monolist = []
+    
+    for char in range(26):
+        monolist += items[chr(ord('A') + char)]
+        
+    return monolist
