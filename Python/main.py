@@ -16,7 +16,7 @@ logtetras = td.get_logtetra_frequencies("Data/tetra_frequency.txt")
 running = True
 
 while running:
-    print(cipher)
+    print('\n', cipher)
     
     cmd = input("\nWhat is your command? ").lower()
     
@@ -79,22 +79,25 @@ while running:
         cipher = open("Resources/ciphertext.txt", 'r').read().upper()
         
     elif cmd == "chi fitness":
-        print(st.variation(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))), '\n')
+        print(st.variation(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))))
         
     elif cmd == "vector fitness":
-        print(st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))), '\n')
+        print(st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))))
         
     elif cmd == "tetra fitness":
-        print(st.tetra_fitness(cipher, st.normalize_dict(tetras)), '\n')
+        print(st.tetra_fitness(cipher, st.normalize_dict(tetras)))
         
     elif cmd == "ioc":
-        print(st.IOC(cipher), '\n')
+        print(st.IOC(cipher))
         
     elif cmd == "iocs":
         try:
             split = int(input("Size of split: "))
                 
             for offset in range(split):
-                print(f"{offset+1}/{split}: {st.IOC_split(cipher, split, offset)}\n")
+                print(f"{offset+1}/{split}: {st.IOC_split(cipher, split, offset)}")
         except:
-            print("Invalid input\n")
+            print("Invalid input")
+            
+    elif cmd == "entropy":
+        print(st.entropy(cipher))

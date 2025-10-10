@@ -78,3 +78,13 @@ def IOC_split(text, split, offset):
         temp += text[i]
         
     return IOC(temp)
+
+def entropy(text):
+    mono_frequencies = normalize_dict(td.get_mono_text(text))
+    
+    entropy = 0
+    
+    for char in mono_frequencies:
+        entropy -= mono_frequencies[char] * log(mono_frequencies[char], 26)
+        
+    return entropy
