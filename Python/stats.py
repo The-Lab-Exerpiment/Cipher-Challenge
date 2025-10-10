@@ -1,4 +1,5 @@
 from math import sqrt, log
+import train_data as td
 
 def variation(measured, expected):
     variation = 0
@@ -45,6 +46,8 @@ def vector_cos(vec1, vec2):
         return dot_product(vec1, vec2)/(magnitude(vec1) * magnitude(vec2))
     
 def tetra_fitness(text, tetra_frequencies):
+    text = td.remove_text(text).upper()
+    
     fitness = 0
     
     for i in range(len(text)-3):

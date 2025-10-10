@@ -83,3 +83,6 @@ while running:
         
     elif cmd == "vector fitness":
         print(st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))), '\n')
+        
+    elif cmd == "tetra fitness":
+        print(st.tetra_fitness(cipher, st.normalize_dict(tetras)), '\n')
