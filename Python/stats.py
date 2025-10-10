@@ -21,6 +21,6 @@ def monolist(items):
     monolist = []
     
     for char in range(26):
-        monolist += items[chr(ord('A') + char)]
+        monolist.append(items[chr(ord('A') + char)])
         
     return monolist

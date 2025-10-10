@@ -59,3 +59,6 @@ while running:
         
     elif cmd == "read":
         cipher = open("Resources/ciphertext.txt", 'r').read().upper()
+        
+    elif cmd == "chi fitness":
+        print(st.variation(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))), '\n')
