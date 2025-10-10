@@ -89,3 +89,12 @@ while running:
         
     elif cmd == "ioc":
         print(st.IOC(cipher), '\n')
+        
+    elif cmd == "iocs":
+        try:
+            split = int(input("Size of split: "))
+                
+            for offset in range(split):
+                print(f"{offset+1}/{split}: {st.IOC_split(cipher, split, offset)}\n")
+        except:
+            print("Invalid input\n")

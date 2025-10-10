@@ -69,3 +69,12 @@ def IOC(text):
         ioc += (mono_frequencies[char] * (mono_frequencies[char]-1))/(len(text) * (len(text)-1))
         
     return ioc*26/1.75
+
+def IOC_split(text, split, offset):
+    text = td.remove_text(text)
+    temp = ""
+    
+    for i in range(offset, len(text), split):
+        temp += text[i]
+        
+    return IOC(temp)
