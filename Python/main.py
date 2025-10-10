@@ -18,7 +18,7 @@ running = True
 while running:
     print(cipher)
     
-    cmd = input("\nWhat is your command? ")
+    cmd = input("\nWhat is your command? ").lower()
     
     if cmd == "quit":
         running = False
@@ -86,3 +86,6 @@ while running:
         
     elif cmd == "tetra fitness":
         print(st.tetra_fitness(cipher, st.normalize_dict(tetras)), '\n')
+        
+    elif cmd == "ioc":
+        print(st.IOC(cipher), '\n')

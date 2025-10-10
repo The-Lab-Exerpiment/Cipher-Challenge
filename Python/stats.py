@@ -58,3 +58,14 @@ def tetra_fitness(text, tetra_frequencies):
             fitness += log(tetra_frequencies[text[i:i+4]])
             
     return fitness/(len(text)-3)
+
+def IOC(text):
+    text = td.remove_text(text)
+    mono_frequencies = td.get_mono_text(text)
+    
+    ioc = 0
+    
+    for char in mono_frequencies:
+        ioc += (mono_frequencies[char] * (mono_frequencies[char]-1))/(len(text) * (len(text)-1))
+        
+    return ioc*26
