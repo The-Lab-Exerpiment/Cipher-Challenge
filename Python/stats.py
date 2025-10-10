@@ -38,7 +38,7 @@ def dot_product(vec1, vec2):
     return total
 
 def magnitude(vec):
-    return sqrt(dot_product(vec1, vec1))
+    return sqrt(dot_product(vec, vec))
 
 def vector_cos(vec1, vec2):
     if len(vec1) == len(vec2):
