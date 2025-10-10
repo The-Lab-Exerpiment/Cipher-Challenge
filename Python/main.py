@@ -1,6 +1,7 @@
 import train_data as td
 import stats as st
-import cipher as cr
+
+cipher = open("Resources/ciphertext.txt", 'r').read().upper()
         
 words = td.get_word_frequencies("Data/word_frequency.txt")
 
@@ -13,7 +14,7 @@ logtetras = td.get_logtetra_frequencies("Data/tetra_frequency.txt")
 running = True
 
 while running:
-    print(cr.get_cipher())
+    print(cipher)
     
     cmd = input("\nWhat is your command? ")
     
@@ -55,3 +56,6 @@ while running:
         
     elif cmd == "logtetra frequ":
         td.print_frequency(logtetras, "tetragram logarithm")
+        
+    elif cmd == "read":
+        cipher = open("Resources/ciphertext.txt", 'r').read().upper()
