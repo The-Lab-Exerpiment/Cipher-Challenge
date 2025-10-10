@@ -196,3 +196,14 @@ def get_mono_text(text):
             mono_frequencies[letter] += 1
             
     return mono_frequencies
+
+def remove_text(text):
+    temp = ""
+       
+    for letter in text:
+        ascii = ord(letter)
+        
+        if (letter >= 'a' and letter <= 'z') or (letter >= 'A' and letter <= 'Z'):
+            temp += letter
+               
+    return temp
