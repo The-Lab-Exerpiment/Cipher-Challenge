@@ -110,3 +110,10 @@ while running:
     elif cmd == "sub mono":
         alphakey = input("Enter monoalphabetic key: ")
         cipher = ks.mono_substitute(cipher, alphakey)
+        
+    elif cmd == "decrypt mono":
+        alphakey = input("Enter monoalphabetic key: ")
+        cipher = ks.mono_decrypt(cipher, alphakey)
+        
+    elif cmd == "upper":
+        cipher = cipher.upper()

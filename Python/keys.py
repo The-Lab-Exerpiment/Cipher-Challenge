@@ -31,3 +31,6 @@ def mono_substitute(text, key):
             ciphertext += letter
             
     return ciphertext
+
+def mono_decrypt(text, key):
+    return mono_substitute(text, invert_alpha_key(key))
