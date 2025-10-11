@@ -133,3 +133,6 @@ while running:
     elif cmd == "crib caesar":
         crib = input("Enter crib: ")
         cipher = ks.crib_caesar(cipher, crib)
+        
+    elif cmd == "chi caesar":
+        cipher = chi_squared_caesar(cipher)

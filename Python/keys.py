@@ -76,3 +76,17 @@ def crib_caesar(text, crib):
                 return caesar_shift(text, shift)
             
     return text.upper()
+
+def chi_squared_caesar(text):
+    og_variance = 999999999999999
+    og_shift = 0
+    tetras = st.normalize_dict(st.monolist(td.get_tetra_frequencies(dr.tetras())))
+    
+    for shift in range(26):
+        variance = variation(st.normalize_dict(st.monolist(caesar_shift(td.get_mono_text(text), shift))), tetras)
+        
+        if variance < og_variance:
+            og_variance = variance
+            og_shift = shift
+            
+    return caesar_shift(text, og_shift)
