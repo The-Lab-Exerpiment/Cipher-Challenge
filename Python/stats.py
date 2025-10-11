@@ -98,3 +98,17 @@ def HCF(num1, num2):
 
 def LCM(num1, num2):
     return num1 * num2 / HCF(num1, num2)
+
+def mod_inverse(num, base):
+    inv1, inv2, rem1, rem2 = 0, 1, base, num
+    
+    while rem2 != 0:
+        quotient = rem1/rem2
+        
+        inv1, inv2 = inv2, inv1 - quotient * inv2
+        rem1, rem2 = rem2, rem1 - quotient * rem2
+        
+    if rem1 == 0:
+        return t % 26
+    
+    return 0
