@@ -90,3 +90,17 @@ def chi_squared_caesar(text):
             og_shift = shift
             
     return caesar_shift(text, og_shift)
+
+def angle_caesar(text):
+    og_angle = 0
+    og_shift = 0
+    mono_frequencies = st.monolist(st.normalize_dict(td.get_mono_frequencies(dr.monos())))
+    
+    for shift in range(26):
+        angle = st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(caesar_shift(text, shift)))), mono_frequencies)
+        
+        if angle > og_angle:
+            og_angle = angle
+            og_shift = shift
+            
+    return caesar_shift(text, og_shift)

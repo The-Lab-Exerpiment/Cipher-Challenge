@@ -136,3 +136,6 @@ while running:
         
     elif cmd == "chi caesar":
         cipher = ks.chi_squared_caesar(cipher)
+        
+    elif cmd == "angle caesar":
+        cipher = ks.angle_caesar(cipher)
