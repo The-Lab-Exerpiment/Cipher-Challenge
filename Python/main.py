@@ -135,4 +135,4 @@ while running:
         cipher = ks.crib_caesar(cipher, crib)
         
     elif cmd == "chi caesar":
-        cipher = chi_squared_caesar(cipher)
+        cipher = ks.chi_squared_caesar(cipher)
