@@ -129,3 +129,7 @@ while running:
             
     elif cmd == "force caesar":
         cipher = ks.brute_force_caesar(cipher)
+        
+    elif cmd == "crib caesar":
+        crib = input("Enter crib: ")
+        cipher = ks.crib_caesar(cipher, crib)

@@ -50,6 +50,9 @@ def generate_affine_key(mult, shift):
 def affine_shift(text, mult, shift):
     return mono_substitute(text, generate_affine_key(mult, shift))
 
+def caesar_shift(text, shift):
+    return affine_shift(text, 1, shift)
+
 def brute_force_caesar(text):
     og_fitness = -9999999999999
     og_shift = 0
@@ -63,3 +66,13 @@ def brute_force_caesar(text):
             og_shift = shift
             
     return affine_shift(text, 1, og_shift)
+
+def crib_caesar(text, crib):
+    text = td.remove_text(text).lower()
+    
+    for i in range(len(text) - len(crib) + 1):
+        for shift in range(26):
+            if text[i:i+len(crib)] == caesar_shift(crib, shift):
+                return caesar_shift(text, shift)
+            
+    return text
