@@ -125,3 +125,6 @@ while running:
         
         except:
             print("Invalid shift")
+            
+    elif cmd == "force caesar":
+        cipher = ks.brute_force_caesar(cipher)

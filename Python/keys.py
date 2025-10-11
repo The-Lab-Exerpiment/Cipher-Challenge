@@ -1,3 +1,6 @@
+import train_data as td
+import stats as st
+
 def invert_alpha_key(key):
     reverse_key = ""
     
@@ -45,3 +48,17 @@ def generate_affine_key(mult, shift):
 
 def affine_shift(text, mult, shift):
     return mono_substitute(text, generate_affine_key(mult, shift))
+
+def brute_force_caesar(text):
+    og_fitness = -9999999999999
+    og_shift = 0
+    tetra_frequencies = td.get_tetra_frequencies("Data/tetra_frequency.txt")
+    
+    for shift in range(26):
+        fitness = st.tetra_fitness(affine_shift(text, 1, shift), tetra_frequencies)
+        
+        if fitness > og_fitness:
+            og_fitness = fitness
+            og_shift = shift
+            
+    return affine_shift(text, 1, og_shift)
