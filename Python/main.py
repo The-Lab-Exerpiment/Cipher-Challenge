@@ -1,5 +1,6 @@
 import train_data as td
 import stats as st
+import keys as ks
 
 import matplotlib.pyplot as plt
 
@@ -101,3 +102,7 @@ while running:
             
     elif cmd == "entropy":
         print(st.entropy(cipher))
+        
+    elif cmd == "invert mono key":
+        alphakey = input("Enter monoalphabetic key: ")
+        print(ks.invert_alpha_key(alphakey))
