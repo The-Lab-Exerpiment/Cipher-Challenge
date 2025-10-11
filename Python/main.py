@@ -1,18 +1,19 @@
 import train_data as td
 import stats as st
 import keys as ks
+import directories as dr
 
 import matplotlib.pyplot as plt
 
-cipher = open("Resources/ciphertext.txt", 'r').read().upper()
+cipher = open(dr.cipher(), 'r').read().upper()
         
-words = td.get_word_frequencies("Data/word_frequency.txt")
+words = td.get_word_frequencies(dr.words())
 
-monos = td.get_mono_frequencies("Data/mono_frequency.txt")
+monos = td.get_mono_frequencies(dr.monos())
 
-tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")
+tetras = td.get_tetra_frequencies(dr.tetras())
 
-logtetras = td.get_logtetra_frequencies("Data/tetra_frequency.txt")
+logtetras = td.get_logtetra_frequencies(dr.tetras())
 
 running = True
 
@@ -25,25 +26,25 @@ while running:
         running = False
         
     elif cmd == "filter":
-        print(td.remove_filler("Resources/train.txt"))
+        print(td.remove_filler(dr.train()))
         
     elif cmd == "train words":
-        td.train_words("Resources/train.txt", "Data/words.txt")
+        td.train_words(dr.train(), dr.words_raw())
         
     elif cmd == "train word frequ":
-        td.train_word_frequency("Resources/train.txt", "Data/word_frequency.txt")
+        td.train_word_frequency(dr.train(), dr.words())
         
     elif cmd == "get words":
-        words = td.get_word_frequencies("Data/word_frequency.txt")
+        words = td.get_word_frequencies(dr.words())
         
     elif cmd == "word frequ":
         td.print_frequency(words, "word")
             
     elif cmd == "train mono":
-        td.train_mono_frequency("Resources/train.txt", "Data/mono_frequency.txt")
+        td.train_mono_frequency(dr.train(), dr.monos())
         
     elif cmd == "get mono":
-        monos = td.get_mono_frequencies("Data/mono_frequency.txt")
+        monos = td.get_mono_frequencies(dr.monos())
         
     elif cmd == "mono frequ":
         td.print_frequency(monos, "monogram")
@@ -65,10 +66,10 @@ while running:
         plt.show()
             
     elif cmd == "train tetra":
-        td.train_tetra_frequency("Resources/train.txt", "Data/tetra_frequency.txt")
+        td.train_tetra_frequency(dr.train(), dr.tetras())
         
     elif cmd == "get tetra":
-        tetras = td.get_tetra_frequencies("Data/tetra_frequency.txt")
+        tetras = td.get_tetra_frequencies(dr.tetras())
         
     elif cmd == "tetra frequ":
         td.print_frequency(tetras, "tetragram")
@@ -77,13 +78,13 @@ while running:
         td.print_frequency(logtetras, "tetragram logarithm")
         
     elif cmd == "read":
-        cipher = open("Resources/ciphertext.txt", 'r').read().upper()
+        cipher = open(dr.cipher(), 'r').read().upper()
         
     elif cmd == "chi fitness":
-        print(st.variation(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))))
+        print(st.variation(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies(dr.monos())))))
         
     elif cmd == "vector fitness":
-        print(st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies("Data/mono_frequency.txt")))))
+        print(st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(cipher))), st.monolist(st.normalize_dict(td.get_mono_frequencies(dr.monos())))))
         
     elif cmd == "tetra fitness":
         print(st.tetra_fitness(cipher, st.normalize_dict(tetras)))
