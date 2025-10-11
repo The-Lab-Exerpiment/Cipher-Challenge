@@ -103,6 +103,10 @@ while running:
     elif cmd == "entropy":
         print(st.entropy(cipher))
         
-    elif cmd == "invert mono key":
+    elif cmd == "invert mono":
         alphakey = input("Enter monoalphabetic key: ")
         print(ks.invert_alpha_key(alphakey))
+        
+    elif cmd == "sub mono":
+        alphakey = input("Enter monoalphabetic key: ")
+        cipher = ks.mono_substitute(cipher, alphakey)

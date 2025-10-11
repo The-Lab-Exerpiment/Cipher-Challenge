@@ -11,3 +11,23 @@ def invert_alpha_key(key):
             return "Invalid key"
                 
     return reverse_key
+
+def mono_substitute(text, key):
+    text = text.upper()
+    key = key.lower()
+    
+    if len(key) != 26:
+        return text
+    
+    ciphertext = ""
+    
+    for letter in text:
+        index = ord(letter) - ord('A')
+        
+        if index >= 0 and index <= 26 and key[index] >= 'a' and key[index] <= 'z':
+            ciphertext += key[index]
+            
+        else:
+            ciphertext += letter
+            
+    return ciphertext
