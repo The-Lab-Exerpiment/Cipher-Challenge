@@ -75,4 +75,4 @@ def crib_caesar(text, crib):
             if text[i:i+len(crib)] == caesar_shift(crib, 26 - shift):
                 return caesar_shift(text, shift)
             
-    return text
+    return text.upper()
