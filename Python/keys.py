@@ -72,7 +72,7 @@ def crib_caesar(text, crib):
     
     for i in range(len(text) - len(crib) + 1):
         for shift in range(26):
-            if text[i:i+len(crib)] == caesar_shift(crib, shift):
+            if text[i:i+len(crib)] == caesar_shift(crib, 26 - shift):
                 return caesar_shift(text, shift)
             
     return text
