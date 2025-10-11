@@ -89,3 +89,9 @@ def entropy(text):
             entropy -= mono_frequencies[char] * log(mono_frequencies[char], 26)
         
     return entropy
+
+def HCF(num1, num2):
+    while num2 != 0:
+        num1, num2 = num2, num1 % num2
+        
+    return num1
