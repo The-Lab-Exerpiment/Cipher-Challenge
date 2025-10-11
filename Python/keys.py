@@ -34,3 +34,14 @@ def mono_substitute(text, key):
 
 def mono_decrypt(text, key):
     return mono_substitute(text, invert_alpha_key(key))
+
+def generate_affine_key(mult, shift):
+    key = ""
+    
+    for char in range(26):
+        key += chr(ord('A') + (char*mult + shift) % 26)
+    
+    return key
+
+def affine_shift(text, mult, shift):
+    return mono_substitute(text, generate_affine_key(mult, shift))

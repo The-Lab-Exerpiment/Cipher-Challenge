@@ -117,3 +117,11 @@ while running:
         
     elif cmd == "upper":
         cipher = cipher.upper()
+        
+    elif cmd == "cshift":
+        try:
+            shift = int(input("Enter shift: "))
+            cipher = ks.affine_shift(cipher, 1, shift)
+        
+        except:
+            print("Invalid shift")
