@@ -167,3 +167,6 @@ while running:
     elif cmd == "crib affine":
         crib = input("Enter crib: ")
         cipher = ks.crib_affine(cipher, crib)
+        
+    elif cmd == "angle affine":
+        cipher = ks.angle_affine(cipher)
