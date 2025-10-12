@@ -139,3 +139,6 @@ while running:
         
     elif cmd == "angle caesar":
         cipher = ks.angle_caesar(cipher)
+        
+    elif cmd == "inv":
+        print(st.mod_inverse(int(input("number: ")), int(input("base: "))))
