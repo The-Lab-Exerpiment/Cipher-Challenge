@@ -100,7 +100,7 @@ def LCM(num1, num2):
     return num1 * num2 / HCF(num1, num2)
 
 def mod_inverse(num, base):
-    quot1, quot2, rem1, rem2 = 0, 1, base, num
+    quot1, quot2, rem1, rem2 = 0, 1, base, num % base
     
     while rem2 != 0:
         quot1, quot2 = quot2, quot1 - rem1//rem2 * quot2
