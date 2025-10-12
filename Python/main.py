@@ -142,3 +142,8 @@ while running:
         
     elif cmd == "inv":
         print(st.mod_inverse(int(input("number: ")), int(input("base: "))))
+        
+    elif cmd == "affine":
+        mult = int(input("Enter multiplier: "))
+        shift = int(input("Enter shift: "))
+        cipher = ks.affine_shift(cipher, mult, shift)

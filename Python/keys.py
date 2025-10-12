@@ -48,6 +48,9 @@ def generate_affine_key(mult, shift):
     return key
 
 def affine_shift(text, mult, shift):
+    if st.mod_inverse(mult, 26) == 0:
+        return text
+    
     return mono_substitute(text, generate_affine_key(mult, shift))
 
 def caesar_shift(text, shift):
