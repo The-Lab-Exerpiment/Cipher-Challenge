@@ -160,3 +160,6 @@ while running:
 
         except:
             print("Invalid input")
+            
+    elif cmd == "force affine":
+        cipher = ks.brute_force_affine(cipher)

@@ -67,6 +67,23 @@ def affine_decrypt(text, mult, shift):
     
     return mono_substitute(text, generate_affine_decrypt(mult, shift))
 
+def brute_force_affine(text):
+    og_fitness = -9999999999999
+    og_mult = 0
+    og_shift = 0
+    
+    for mult in range(26):
+        if st.mod_inverse(mult, 26) != 0:
+            for shift in range(26):
+                fitness = st.tetra_fitness(affine_shift(text, mult, shift), td.get_tetra_frequencies(dr.tetras()))
+                
+                if fitness >= og_fitness:
+                    og_fitness = fitness
+                    og_mult = mult
+                    og_shift = shift
+                
+    return affine_shift(text, og_mult, og_shift)
+
 def caesar_shift(text, shift):
     return affine_shift(text, 1, shift)
 
