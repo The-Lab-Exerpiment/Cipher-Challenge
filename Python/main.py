@@ -144,6 +144,19 @@ while running:
         print(st.mod_inverse(int(input("number: ")), int(input("base: "))))
         
     elif cmd == "affine":
-        mult = int(input("Enter multiplier: "))
-        shift = int(input("Enter shift: "))
-        cipher = ks.affine_shift(cipher, mult, shift)
+        try:
+            mult = int(input("Enter multiplier: "))
+            shift = int(input("Enter shift: "))
+            cipher = ks.affine_shift(cipher, mult, shift)
+        
+        except:
+            print("Invalid input")
+            
+    elif cmd == "decrypt affine":
+        try:
+            mult = int(input("Enter multiplier: "))
+            shift = int(input("Enter shift: "))
+            cipher = ks.affine_decrypt(cipher, mult, shift)
+
+        except:
+            print("Invalid input")

@@ -53,6 +53,20 @@ def affine_shift(text, mult, shift):
     
     return mono_substitute(text, generate_affine_key(mult, shift))
 
+def generate_affine_decrypt(mult, shift):
+    key = ""
+    
+    for char in range(26):
+        key += chr(ord('A') + ((char - shift) * st.mod_inverse(mult, 26)) % 26)
+        
+    return key
+
+def affine_decrypt(text, mult, shift):
+    if st.mod_inverse(mult, 26) == 0:
+        return text
+    
+    return mono_substitute(text, generate_affine_decrypt(mult, shift))
+
 def caesar_shift(text, shift):
     return affine_shift(text, 1, shift)
 
