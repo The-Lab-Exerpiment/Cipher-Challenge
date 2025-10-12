@@ -103,6 +103,24 @@ def crib_affine(text, crib):
     
     return text.upper()
 
+def angle_affine(text):
+    og_angle = 0
+    og_mult = 0
+    og_shift = 0
+    mono_frequencies = st.monolist(st.normalize_dict(td.get_mono_frequencies(dr.monos())))
+    
+    for mult in range(26):
+        if st.mod_inverse(mult, 26) != 0:
+            for shift in range(26):
+                angle = st.vector_cos(st.monolist(st.normalize_dict(td.get_mono_text(affine_decrypt(text, mult, shift)))), mono_frequencies)
+                
+                if angle > og_angle:
+                    og_angle = angle
+                    og_mult = mult
+                    og_shift = shift
+                    
+    return affine_decrypt(text, mult, shift)
+
 def caesar_shift(text, shift):
     return affine_shift(text, 1, shift)
 
