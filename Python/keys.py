@@ -91,14 +91,14 @@ def crib_affine(text, crib):
     for i in range(len(text) - len(crib) + 1):
         for i1 in range(len(crib)):
             for i2 in range(i1+1, len(crib)):
-                t1, t2, c1, c2 = ord(text[i+i1]), ord(text[i+i2]), ord(crib[i+i1]), ord(crib[i+i2])
+                t1, t2, c1, c2 = ord(text[i+i1]), ord(text[i+i2]), ord(crib[i1]), ord(crib[i2])
                 
                 mult = ((t1-t2) * st.mod_inverse((c1-c2), 26)) % 26
                 
                 if mult != 0:
                     shift = t1 - c1 * mult
                     
-                    if affine_shift(text[i+len(crib)], mult, shift) == affine_shift(crib, mult, shift):
+                    if affine_shift(text[i:i+len(crib)], mult, shift) == affine_shift(crib, mult, shift):
                         return affine_shift(text, mult, shift)
     
     return text

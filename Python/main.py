@@ -163,3 +163,7 @@ while running:
             
     elif cmd == "force affine":
         cipher = ks.brute_force_affine(cipher)
+        
+    elif cmd == "crib affine":
+        crib = input("Enter crib: ")
+        cipher = ks.crib_affine(cipher, crib)
