@@ -1,10 +1,11 @@
-import cipher_files
-from generic_functions import remove_spaces
-from frequency_constants import per_letter_frequency
 import math
+from frequency_constants import per_letter_frequency
+from generic_functions import strip_text, remove_spaces
 
 
-def get_monograms(string: str, function=str.upper, increment=str.isalpha) -> dict:
+def get_monograms(
+    string: str, function=str.upper, increment=str.isalpha, decimal=True
+) -> dict:
     result_table = {}
     counter = 0
 
@@ -12,15 +13,16 @@ def get_monograms(string: str, function=str.upper, increment=str.isalpha) -> dic
         result_table[function(character)] = result_table.get(function(character), 0) + 1
         counter += increment(character)
 
-    for character in result_table:
-        result_table[character] = (result_table[character]) / counter
+    if decimal:
+        for character in result_table:
+            result_table[character] = (result_table[character]) / counter
     return result_table
 
 
 def get_tetragrams(
     string: str, function=str.upper, increment=str.isalpha, decimal=True
-) -> dict:
-    result_table = {}
+) -> dict[str, float] | dict[str, int]:
+    result_table: dict[str, float] | dict[str, int] = {string[:4]: 1}
     tetragram = string[:4]
     counter = 0
 
@@ -35,10 +37,10 @@ def get_tetragrams(
     return result_table
 
 
-def get_log_frequency_table_from_percentages(frequency_table: dict) -> dict:
+def get_log_frequency_table(frequency_table: dict) -> dict:
     for character in frequency_table:
         frequency_table[character] = math.log(frequency_table[character]) + 1
-    return frequency_table
+    return frequency_table  # Implemented as asked by the unit - seems useless
 
 
 def chi_squared(actual_set: dict, expected_set: dict, do_not_ignore=True) -> float:
@@ -55,54 +57,104 @@ def chi_squared(actual_set: dict, expected_set: dict, do_not_ignore=True) -> flo
     return chi_squared_statistic
 
 
-def determine_monogram_fitness_using_chi_squared(
-    string: str, expected_set=per_letter_frequency, function=remove_spaces
-):
-    return 1 / chi_squared(get_monograms(remove_spaces(string)), per_letter_frequency)
+def monograms_chi_squared(
+    string: str,
+    expected_set=per_letter_frequency,
+    do_not_ignore=True,
+) -> float:
+    return 1 / chi_squared(
+        get_monograms(strip_text(string)),
+        expected_set,
+        do_not_ignore=do_not_ignore,
+    )
 
 
-def dot_product(u_vector: dict, v_vector: dict):
+def dot_product(u_vector: dict, v_vector: dict) -> float:
     dot_product = 0
     for component in u_vector:
         dot_product += u_vector[component] * v_vector[component]
     return dot_product
 
 
-def length_of_vector(vector: dict):
+def magnitude(vector: dict) -> float:
     return dot_product(vector, vector)
 
 
-def angle_between_vectors(u_vector: dict, v_vector: dict):
+def angle_cosine(u_vector: dict, v_vector: dict) -> float:
     return dot_product(u_vector, v_vector) / (
-        (length_of_vector(u_vector) * length_of_vector(v_vector)) ** 0.5
+        (magnitude(u_vector) * magnitude(v_vector)) ** 0.5
     )
 
 
-def determine_monogram_fitness_using_angle_between_vectors(
-    u_vector: dict, v_vector: dict, do_not_ignore=True
-):
-    return angle_between_vectors(u_vector, v_vector)
+def monograms_angle_cosine(string: str, v_vector: dict):
+    return angle_cosine(get_monograms(strip_text(string)), v_vector)
 
 
-def get_log_frequencies_from_frequency(frequency, total_frequency):
-    return math.log(frequency) - math.log(total_frequency)
+def get_english_frequency(string: str, english_dictionary: set) -> float:
+    words = string.split()
+    counter = 0
+    english_counter = 0
+    for word in words:
+        counter += 1
+        english_counter += word in english_dictionary
+    return english_counter / counter
 
 
-def tetragram_fitness(actual_tetragrams: dict, expected_tetragrams: dict):
+def get_log_frequencies(frequency, total_frequency) -> float:
+    return (
+        math.log(frequency) - math.log(total_frequency)
+    )  # equal to math.log(frequency/total_frequency) -> we can compute the frequency percentage without using division
+
+
+def tetragram_fitness(actual_tetragrams: dict, expected_tetragrams: dict) -> float:
     total_frequency = sum(expected_tetragrams.values())
     fitness = 0
+    contains_unlikely_tetragrams = 0
     for tetragram in actual_tetragrams:
         if tetragram in expected_tetragrams:
-            fitness += actual_tetragrams[
-                tetragram
-            ] * get_log_frequencies_from_frequency(
+            fitness += actual_tetragrams[tetragram] * get_log_frequencies(
                 expected_tetragrams[tetragram], total_frequency
             )
         else:  # the tetragram does not occur in the English language
             fitness += 0
-    fitness /= sum(actual_tetragrams.values())
+            contains_unlikely_tetragrams += (
+                1  # TODO: determine better action when unexpected tetragram is hit
+            )
+    fitness /= total_frequency
     return fitness
 
 
-expected_tetragrams = cipher_files.open_file_as_dict("tetragrams.json")
-total_frequency = sum(expected_tetragrams.values())
+def get_n_grams(string: str, length: int) -> dict:  # no overlap
+    n_gram_frequency = {}
+    for index in range(0, len(string), length):
+        if (index + length) > len(string):
+            break  # if there aren't "length" remaining non overlapping character at the end of the string
+        n_gram = string[index : index + length]
+        n_gram_frequency[n_gram] = n_gram_frequency.get(n_gram, 0) + 1
+    return n_gram_frequency
+
+
+def index_of_coincidence(string: str, length_of_n_grams: int = 1) -> float:
+    string = remove_spaces(string)
+    n_gram_frequency = get_n_grams(string, length_of_n_grams)
+    total_frequency = sum(n_gram_frequency.values())
+    # print(n_gram_frequency, total_frequency)
+    result = 0
+    for n_gram in n_gram_frequency:
+        count = n_gram_frequency[n_gram]
+        result += (count * (count - 1)) / (total_frequency * (total_frequency - 1))
+    return result * (26**length_of_n_grams)
+
+
+def entropy(string: str = "", monograms: dict = {}) -> float:
+    if not monograms:
+        if string:
+            monograms = get_monograms(string)
+        else:
+            raise Exception("Erroneous call to entropy function")
+    return -sum(
+        [monograms[letter] * math.log(monograms[letter], 26) for letter in monograms]
+    )
+
+
+# total_frequency = sum(expected_tetragrams.values())
