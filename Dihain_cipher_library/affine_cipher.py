@@ -141,7 +141,7 @@ def attack(string: str):
     chi_squared, angles, chi_squared_log_data, angles_log_data = monogram_attack(
         string, valid_keys
     )
-    log_directory = get_log_dir_name("logs/affine_cipher_logs/log_")
+    log_directory = get_log_dir_name("logs/affine_cipher_logs/logs_")
     mkdir(log_directory)
     save_list_to_file(tetragram_log_data, f"{log_directory}/tetragram_fitness_log")
     save_list_to_file(chi_squared_log_data, f"{log_directory}/chi_squared_log")
