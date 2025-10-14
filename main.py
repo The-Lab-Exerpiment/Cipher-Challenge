@@ -170,3 +170,21 @@ while running:
         
     elif cmd == "angle affine":
         cipher = ks.angle_affine(cipher)
+        
+    elif cmd == "sub key":
+        key = input("Enter keyword: ")
+        filltype = input("Enter fill method (continue, last): ")
+        
+        print(ks.generate_sub_key(key, fill=filltype))
+        
+    elif cmd == "encrypt sub":
+        key = input("Enter keyword: ")
+        filltype = input("Enter fill method (continue, last): ")
+        
+        cipher = ks.mono_substitute(cipher, ks.generate_sub_key(key, fill=filltype))
+        
+    elif cmd == "decrypt sub":
+        key = input("Enter keyword: ")
+        filltype = input("Enter fill method (continue, last): ")
+        
+        cipher = ks.mono_decrypt(cipher, ks.generate_sub_key(key, fill=filltype))
