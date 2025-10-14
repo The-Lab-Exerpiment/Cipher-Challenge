@@ -175,3 +175,31 @@ def angle_caesar(text):
             og_shift = shift
             
     return caesar_shift(text, og_shift)
+
+def generate_sub_key(key, fill=""):
+    subkey = ""
+    key = td.remove_text(key).upper()
+    fill = fill.lower()
+    
+    for letter in key:
+        if letter not in subkey:
+            subkey += letter
+            
+    shift = 0
+    
+    if fill == "continue":
+        shift = ord(subkey[len(subkey)-1]) - ord('A')
+        
+    elif fill == "last":
+        for char in range(26):
+            letter = chr(ord('A') + char)
+            if letter in subkey:
+                shift = char
+                
+    for char in range(26):
+        letter = chr((char + shift) % 26 + ord('A'))
+        
+        if letter not in subkey:
+            subkey += letter
+            
+    return subkey
