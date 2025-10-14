@@ -1,4 +1,3 @@
-import matplotlib
 from matplotlib.image import AxesImage
 import matplotlib.pyplot as plt
 from matplotlib import font_manager, ticker
@@ -22,14 +21,23 @@ def plot_bar_chart(
     name_x="",
     name_y="",
     title="",
+    fig=None,
+    ax=None,
     **kw,
 ):
-    fig, ax = plt.subplots()
-    ax.bar(data_set_x, data_set_y, **kw)
+    if fig is None or ax is None:
+        fig, ax = plt.subplots()
+    else:
+        ax.bar(data_set_x, data_set_y, **kw)
+        return fig, ax
     ax.set_xlabel(name_x)
+    try:
+        ax.set_xticks(range(len(data_set_x)), data_set_x)
+    except:
+        pass
     ax.set_title(title)
     ax.set_ylabel(name_y)
-    ax.set_xticks(data_set_x)
+    ax.bar(data_set_x, data_set_y, **kw)
     return fig, ax
 
 

@@ -3,15 +3,14 @@ from frequency_functions import get_tetragrams, index_of_coincidence, entropy
 from generic_functions import strip_text
 
 
-def train_tetragrams(file_name: str, result_file: str):
-    with open(file_name, "r") as file:
-        text = strip_text("".join(file.readlines()))
-        save_dict_to_file(get_tetragrams(text, decimal=False), result_file)
-
-
 def format_corpus(file_name: str) -> str:
-    lines = [strip_text(k) for k in open(file_name, "r").readlines()]
+    lines = [str.upper(strip_text(k)) for k in open(file_name, "r").readlines()]
     return "".join(lines)
+
+
+def train_tetragrams(file_name: str) -> dict:
+    text = format_corpus(file_name)
+    return get_tetragrams(text, decimal=False)
 
 
 def get_ioc_example_data():
@@ -53,3 +52,23 @@ def get_example_entropy_data():
     print(f"English corpus (Wortschatz Leipzig) - English web 2018: {c}")
     print(f"world_at_war: {d}")
     print(f"Average entropy of non-random texts: {(a + b + c + d) / 4}")
+
+
+d = train_tetragrams(("corpora/english_corpus_300k.txt"))
+print("d")
+e = train_tetragrams(("corpora/browncorpus"))
+print("e")
+f = train_tetragrams(("corpora/english_web.txt"))
+print("f")
+g = train_tetragrams(("corpora/world_at_war"))
+print("g")
+
+for key in e:
+    d[key] = d.get(key, 0) + e[key]
+for key in f:
+    d[key] = d.get(key, 0) + f[key]
+for key in g:
+    d[key] = d.get(key, 0) + g[key]
+
+print(d)
+save_dict_to_file(d, "new_tetragram_data.json")

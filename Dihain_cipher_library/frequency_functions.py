@@ -1,6 +1,8 @@
+from io import text_encoding
 import math
 from frequency_constants import per_letter_frequency
 from generic_functions import strip_text, remove_spaces
+from cipher_files import open_file_as_dict
 
 
 def get_monograms(
@@ -100,27 +102,25 @@ def get_english_frequency(string: str, english_dictionary: set) -> float:
     return english_counter / counter
 
 
-def get_log_frequencies(frequency, total_frequency) -> float:
+def get_log_frequency(frequency, total_frequency) -> float:
     return (
         math.log(frequency) - math.log(total_frequency)
     )  # equal to math.log(frequency/total_frequency) -> we can compute the frequency percentage without using division
 
 
-def tetragram_fitness(actual_tetragrams: dict, expected_tetragrams: dict) -> float:
-    total_frequency = sum(expected_tetragrams.values())
+def tetragram_fitness(
+    actual_tetragrams: str, expected_tetragrams: dict, total_frequency: int
+) -> float:
     fitness = 0
-    contains_unlikely_tetragrams = 0
-    for tetragram in actual_tetragrams:
+    for index in range(0, len(actual_tetragrams) - 3):
+        tetragram = actual_tetragrams[index : index + 4]
         if tetragram in expected_tetragrams:
-            fitness += actual_tetragrams[tetragram] * get_log_frequencies(
+            fitness += get_log_frequency(
                 expected_tetragrams[tetragram], total_frequency
             )
-        else:  # the tetragram does not occur in the English language
-            fitness += 0
-            contains_unlikely_tetragrams += (
-                1  # TODO: determine better action when unexpected tetragram is hit
-            )
-    fitness /= total_frequency
+        else:
+            fitness += get_log_frequency(0.001, total_frequency)
+    fitness /= len(actual_tetragrams) - 3
     return fitness
 
 
@@ -155,6 +155,44 @@ def entropy(string: str = "", monograms: dict = {}) -> float:
     return -sum(
         [monograms[letter] * math.log(monograms[letter], 26) for letter in monograms]
     )
+
+
+class FastTetragramFitness:  # Class to store log frequencies locally to the fast tetragram function if needed
+    log_frequencies = []
+
+    @staticmethod
+    def compute_log_frequencies(file_name: str):
+        to_normalised_alpha = lambda l: ord(l) - 65
+        expected_tetragrams = open_file_as_dict(file_name)
+        total_frequency = sum(expected_tetragrams.values())
+        constant = get_log_frequency(0.001, total_frequency)
+        for _ in range(2**20 + 1):
+            FastTetragramFitness.log_frequencies.append(constant)
+        for tetragram in expected_tetragrams:
+            code = (
+                (to_normalised_alpha(tetragram[0]) << 15)
+                + (to_normalised_alpha(tetragram[1]) << 10)
+                + (to_normalised_alpha(tetragram[2]) << 5)
+                + to_normalised_alpha(tetragram[3])
+            )
+            FastTetragramFitness.log_frequencies[code] = get_log_frequency(
+                expected_tetragrams[tetragram],
+                total_frequency,
+            )
+
+    @staticmethod
+    def fast_tetragram_fitness(chr_codes_normalised: list[int]) -> float:
+        fitness = 0
+        for index in range(0, len(chr_codes_normalised) - 3):
+            code = (
+                (chr_codes_normalised[index] << 15)
+                + (chr_codes_normalised[index + 1] << 10)
+                + (chr_codes_normalised[index + 2] << 5)
+                + (chr_codes_normalised[index + 3])
+            )
+            fitness += FastTetragramFitness.log_frequencies[code]
+        fitness /= len(chr_codes_normalised) - 3
+        return fitness
 
 
 # total_frequency = sum(expected_tetragrams.values())
