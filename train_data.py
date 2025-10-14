@@ -207,3 +207,23 @@ def remove_text(text):
             temp += letter
                
     return temp
+
+def split_text(text, split):
+    text = remove_text(text)
+    blocks = []
+    
+    for shift in range(split):
+        string = ""
+        
+        for i in range(len(text)//split + 1):
+            index = i*split + shift
+            
+            if index >= len(text):
+                string += ' '
+                
+            else:
+                string += text[index]
+                
+        blocks.append(string)
+        
+    return blocks
