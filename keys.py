@@ -203,3 +203,6 @@ def generate_sub_key(key, fill=""):
             subkey += letter
             
     return subkey
+
+def poly_substitute(text, keys):
+    print(td.split_text(text, 3))

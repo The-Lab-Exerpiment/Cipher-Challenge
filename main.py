@@ -188,3 +188,6 @@ while running:
         filltype = input("Enter fill method (continue, last): ")
         
         cipher = ks.mono_decrypt(cipher, ks.generate_sub_key(key, fill=filltype))
+        
+    elif cmd == "sub poly":
+        cipher = ks.poly_substitute(cipher, "")
