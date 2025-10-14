@@ -138,7 +138,7 @@ def index_of_coincidence(string: str, length_of_n_grams: int = 1) -> float:
     string = remove_spaces(string)
     n_gram_frequency = get_n_grams(string, length_of_n_grams)
     total_frequency = sum(n_gram_frequency.values())
-    # print(n_gram_frequency, total_frequency)IDSIYUDHJZXIXTOQOXUSVOROMNSRMOREXOESGOMMSVOMNSRSUSDHJSYSTNIJOUQSTSMKSREMNUDJTNIISRJNIDOUKQLHMNGUXLUINIXINHRGNCDSTIDSUNQCUHRUZSOIXTSVOMNSRSUSNRHRSSCNUHVSIDSUSGTSIQSUUOESIHMVYNSJSTUIHJOIGDZXIXTOQOIDXTUVOKUOIISR
+    # print(n_gram_frequency, total_frequency)
     result = 0
     for n_gram in n_gram_frequency:
         count = n_gram_frequency[n_gram]
