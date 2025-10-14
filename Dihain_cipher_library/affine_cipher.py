@@ -73,20 +73,23 @@ def tetragram_attack(
     expected_tetragrams = open_file_as_dict("frequency_data/tetragrams.json")
     min_tetragram_fitness = float("inf")
     max_tetragram_fitness = -float("inf")
+    total_frequency = sum(expected_tetragrams.values())
     for index in range(len(valid_keys)):
         for b in range(26):
             deciphered_text = decipher_affine_cipher(string, valid_keys[index], b)
             tetragrams_fitnesses[index][b] = tetragram_fitness(  # type: ignore
-                get_tetragrams(deciphered_text, decimal=True), expected_tetragrams
+                deciphered_text,
+                expected_tetragrams,
+                total_frequency,
             )
-            # log_data.append([tetragrams_fitnesses[index][b], [valid_keys[index], b]])  # type: ignore
+            log_data.append([tetragrams_fitnesses[index][b], [valid_keys[index], b]])  # type: ignore
             min_tetragram_fitness = min(
                 min_tetragram_fitness, tetragrams_fitnesses[index][b]
             )
             max_tetragram_fitness = max(
                 max_tetragram_fitness, tetragrams_fitnesses[index][b]
             )
-    # log_data = sorted(log_data, reverse=True)
+    log_data = sorted(log_data, reverse=True)
 
     for index in range(
         len(valid_keys)
