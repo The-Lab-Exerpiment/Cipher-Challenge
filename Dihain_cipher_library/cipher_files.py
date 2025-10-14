@@ -24,12 +24,12 @@ def save_list_to_file(l: set | list, file_name: str):
 
 
 def open_file_as_set(file_name: str):
-    with open(file_name, "w") as file:
+    with open(file_name, "r") as file:
         return set(json.load(file))
 
 
 def open_file_as_list(file_name: str):
-    with open(file_name, "w") as file:
+    with open(file_name, "r") as file:
         return list(json.load(file))
 
 
