@@ -2,6 +2,8 @@ import train_data as td
 import stats as st
 import directories as dr
 
+import random
+
 def invert_alpha_key(key):
     reverse_key = ""
     
@@ -204,16 +206,34 @@ def generate_sub_key(key, fill=""):
             
     return subkey
 
-def stochastic_hill_climb_mono(text):
-        tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
-        key = []
+def stochastic_hill_climb_mono(text, limit=10000):
+    tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+    key = []
+    
+    for char in range(26):
+        key.append(chr(ord('A') + char))
         
-        for char in range(26):
-            key.append(chr(ord('A') + char))
+    random.shuffle(key)
+    og_fitness = st.tetra_fitness(mono_substitute(text, st.list_to_str(key)), tetra_frequencies)
+    
+    count = 0
+    
+    while count < limit:
+        child_key = key.copy()
+        
+        i1, i2 = random.randint(0,25), random.randint(0,25)
+        child_key[i1], child_key[i2] = child_key[i2], child_key[i1]
+        
+        fitness = st.tetra_fitness(mono_substitute(text, st.list_to_str(child_key)), tetra_frequencies)
+        
+        if fitness > og_fitness:
+            og_fitness = fitness
+            key = child_key.copy()
+            count = 0
             
-        random.shuffle(key)
+        count += 1
         
-        
+    return st.list_to_str(key)
 
 def poly_substitute(text, keys):
     print(td.split_text(text, 3))
