@@ -190,7 +190,7 @@ while running:
         cipher = ks.mono_decrypt(cipher, ks.generate_sub_key(key, fill=filltype))
         
     elif cmd == "hill sub":
-        cipher = ks.mono_substitute(cipher, ks.stochastic_hill_climb_mono(cipher))
+        cipher = ks.stochastic_hill_climb_mono(cipher)
         
     elif cmd == "sub poly":
         cipher = ks.poly_substitute(cipher, "")

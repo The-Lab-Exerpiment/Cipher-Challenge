@@ -206,7 +206,7 @@ def generate_sub_key(key, fill=""):
             
     return subkey
 
-def stochastic_hill_climb_mono(text, limit=10000):
+def stochastic_hill_key_mono(text, limit=10000):
     tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
     key = []
     
@@ -230,10 +230,28 @@ def stochastic_hill_climb_mono(text, limit=10000):
             og_fitness = fitness
             key = child_key.copy()
             count = 0
-            
+        
         count += 1
         
     return st.list_to_str(key)
+
+def stochastic_hill_climb_mono(text, limit=50):
+    tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+    og_fitness = st.tetra_fitness(text, tetra_frequencies)
+    og_key = ""
+    
+    for i in range(limit):
+        key = stochastic_hill_key_mono(text)
+        fitness = st.tetra_fitness(mono_substitute(text, key), tetra_frequencies)
+        
+        if fitness > og_fitness:
+            og_fitness = fitness
+            og_key = key
+            print(f"{i+1}/{limit}: {invert_alpha_key(og_key).upper()}")
+            
+    print(f"Best key: {invert_alpha_key(og_key).upper()}")
+    
+    return mono_substitute(text, og_key)
 
 def poly_substitute(text, keys):
     print(td.split_text(text, 3))
