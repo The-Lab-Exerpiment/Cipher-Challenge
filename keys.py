@@ -204,5 +204,16 @@ def generate_sub_key(key, fill=""):
             
     return subkey
 
+def stochastic_hill_climb_mono(text):
+        tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+        key = []
+        
+        for char in range(26):
+            key.append(chr(ord('A') + char))
+            
+        random.shuffle(key)
+        
+        
+
 def poly_substitute(text, keys):
     print(td.split_text(text, 3))

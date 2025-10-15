@@ -110,3 +110,11 @@ def mod_inverse(num, base):
         return quot1 % base
     
     return 0
+
+def list_to_str(letters):
+    text = ""
+    
+    for letter in letters:
+        text += letter
+        
+    return text
