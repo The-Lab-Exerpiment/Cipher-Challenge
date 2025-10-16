@@ -102,23 +102,27 @@ while running:
             print("Invalid input")
             
     elif cmd == "plot ioc":
-        limit = int(input("Enter maximum range of data: "))
-        nums = []
-        iocs = []
-        
-        for i in range(limit):
-            split = i+1
-            nums.append(split)
-            average_ioc = 0
+        try:
+            limit = int(input("Enter maximum range of data: "))
+            nums = []
+            iocs = []
             
-            for offset in range(split):
-                average_ioc += st.IOC_split(cipher, split, offset) / split
+            for i in range(limit):
+                split = i+1
+                nums.append(split)
+                average_ioc = 0
                 
-            iocs.append(average_ioc)
+                for offset in range(split):
+                    average_ioc += st.IOC_split(cipher, split, offset) / split
+                    
+                iocs.append(average_ioc)
+                
+            plt.bar(nums, iocs)
+            plt.title("IoC's")
+            plt.show()
             
-        plt.bar(nums, iocs)
-        plt.title("IoC's")
-        plt.show()
+        except:
+            print("Invalid limit")
             
     elif cmd == "entropy":
         print(st.entropy(cipher))
@@ -225,7 +229,7 @@ while running:
         except:
             print("Invalid input")
         
-    elif cmd == "decipher poly":
+    elif cmd == "decrypt poly":
         try:
             split = int(input("Enter split number: "))
             
@@ -238,3 +242,25 @@ while running:
 
         except:
             print("Invalid input")
+            
+    elif cmd == "vigenere":
+        key = input("Enter key: ")
+        key = td.remove_text(key).upper()
+        
+        keys = []
+        
+        for letter in key:
+            keys.append(ks.generate_affine_key(1, ord(letter) - ord('A')))
+            
+        cipher = ks.poly_substitute(cipher, keys)
+        
+    elif cmd == "decrypt vig":
+        key = input("Enter key: ")
+        key = td.remove_text(key).upper()
+        
+        keys = []
+        
+        for letter in key:
+            keys.append(ks.generate_affine_decrypt(1, ord(letter) - ord('A')))
+            
+        cipher = ks.poly_substitute(cipher, keys)
