@@ -261,3 +261,23 @@ def poly_substitute(text, keys):
         text[i] = mono_substitute(text[i], keys[i])
         
     return td.join_blocks(text)
+
+def vigenere(text, key):
+    key = td.remove_text(key).upper()
+    
+    keys = []
+    
+    for letter in key:
+        keys.append(generate_affine_key(1, ord(letter) - ord('A')))
+
+    return poly_substitute(text, keys)
+
+def vigenere_decrypt(text, key):
+    key = td.remove_text(key).upper()
+    
+    keys = []
+    
+    for letter in key:
+        keys.append(generate_affine_decrypt(1, ord(letter) - ord('A')))
+
+    return poly_substitute(text, keys)

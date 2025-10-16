@@ -245,22 +245,8 @@ while running:
             
     elif cmd == "vigenere":
         key = input("Enter key: ")
-        key = td.remove_text(key).upper()
-        
-        keys = []
-        
-        for letter in key:
-            keys.append(ks.generate_affine_key(1, ord(letter) - ord('A')))
-            
-        cipher = ks.poly_substitute(cipher, keys)
+        cipher = ks.vigenere(cipher, key)
         
     elif cmd == "decrypt vig":
         key = input("Enter key: ")
-        key = td.remove_text(key).upper()
-        
-        keys = []
-        
-        for letter in key:
-            keys.append(ks.generate_affine_decrypt(1, ord(letter) - ord('A')))
-            
-        cipher = ks.poly_substitute(cipher, keys)
+        cipher = ks.vigenere_decrypt(cipher, key)
