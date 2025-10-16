@@ -61,6 +61,10 @@ def tetra_fitness(text, tetra_frequencies):
 
 def IOC(text):
     text = td.remove_text(text)
+    
+    if len(text) <= 1:
+        return 0
+    
     mono_frequencies = td.get_mono_text(text)
     
     ioc = 0
