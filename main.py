@@ -101,6 +101,25 @@ while running:
         except:
             print("Invalid input")
             
+    elif cmd == "plot ioc":
+        limit = int(input("Enter maximum range of data: "))
+        nums = []
+        iocs = []
+        
+        for i in range(limit):
+            split = i+1
+            nums.append(split)
+            average_ioc = 0
+            
+            for offset in range(split):
+                average_ioc += st.IOC_split(cipher, split, offset) / split
+                
+            iocs.append(average_ioc)
+            
+        plt.bar(nums, iocs)
+        plt.title("IoC's")
+        plt.show()
+            
     elif cmd == "entropy":
         print(st.entropy(cipher))
         
