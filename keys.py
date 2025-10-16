@@ -281,3 +281,20 @@ def vigenere_decrypt(text, key):
         keys.append(generate_affine_decrypt(1, ord(letter) - ord('A')))
 
     return poly_substitute(text, keys)
+
+def brute_force_vigenere(text, limit):
+    og_key = ""
+        
+    tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+    og_fitness = st.tetra_fitness(text, tetra_frequencies)
+    
+    for length in range(1, limit+1):
+        print(int_to_key(length, 3))
+        
+def int_to_key(num, length):
+    key = ""
+    
+    for i in range(length):
+        key += chr(ord('A') + (num // (26**i)) % 26)
+        
+    return key

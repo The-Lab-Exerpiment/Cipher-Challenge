@@ -250,3 +250,7 @@ while running:
     elif cmd == "decrypt vig":
         key = input("Enter key: ")
         cipher = ks.vigenere_decrypt(cipher, key)
+        
+    elif cmd == "force vigenere":
+        limit = int(input("Enter limit of length of keyword: "))
+        cipher = ks.brute_force_vigenere(cipher, limit)
