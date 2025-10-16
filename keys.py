@@ -314,8 +314,9 @@ def hill_climb_vigenere(text, period):
     finished = False
     
     while not finished:
+        finished = True
+        
         for i in range(period):
-            best_char = 0
             key = og_key.copy()
             
             for char in range(26):
@@ -325,7 +326,12 @@ def hill_climb_vigenere(text, period):
                 if fitness > og_fitness:
                     og_fitness = fitness
                     og_key = key.copy()
-                    print("")
+                    print(f"New key found: {st.list_to_str(og_key)}")
+                    finished = False
+                    
+    print(f"Best key: {st.list_to_str(og_key)}")
+    
+    return vigenere_decrypt(text, st.list_to_str(og_key))
         
 def int_to_key(num, length):
     key = ""

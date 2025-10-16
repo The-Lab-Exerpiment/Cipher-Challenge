@@ -259,3 +259,7 @@ while running:
 
         except:
             print("Invalid input")
+            
+    elif cmd == "hill vigenere":
+        period = int(input("Enter period of key: "))
+        cipher = ks.hill_climb_vigenere(cipher, period)
