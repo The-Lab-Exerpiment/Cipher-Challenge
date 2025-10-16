@@ -227,3 +227,12 @@ def split_text(text, split):
         blocks.append(string)
         
     return blocks
+
+def join_blocks(blocks):
+    text = ""
+    
+    for i in range(len(blocks[0])):
+        for j in range(len(blocks)):
+            text += blocks[j][i]
+            
+    return text

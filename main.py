@@ -193,4 +193,13 @@ while running:
         cipher = ks.stochastic_hill_climb_mono(cipher)
         
     elif cmd == "sub poly":
-        cipher = ks.poly_substitute(cipher, "")
+        num = int(input("Enter split number: "))
+        
+        keys = []
+        for i in range(num):
+            key = input(f"Monoalphabetic key {i+1}: ")
+            keys.append(key)
+            
+        print(keys)
+        
+        cipher = ks.poly_substitute(cipher, keys)
