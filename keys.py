@@ -300,7 +300,32 @@ def brute_force_vigenere(text, lower, upper):
                 
     print(f"Best key: {og_key}")
     
-    return vigenere_decrypt(text, key)
+    return vigenere_decrypt(text, og_key)
+
+def hill_climb_vigenere(text, period):
+    og_key = []
+    
+    for i in range(period):
+        og_key.append("A")
+        
+    tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+    og_fitness = st.tetra_fitness(text, tetra_frequencies)
+    
+    finished = False
+    
+    while not finished:
+        for i in range(period):
+            best_char = 0
+            key = og_key.copy()
+            
+            for char in range(26):
+                key[i] = chr(ord('A') + char)
+                fitness = st.tetra_fitness(vigenere_decrypt(text, st.list_to_str(key)), tetra_frequencies)
+                
+                if fitness > og_fitness:
+                    og_fitness = fitness
+                    og_key = key.copy()
+                    print("")
         
 def int_to_key(num, length):
     key = ""
