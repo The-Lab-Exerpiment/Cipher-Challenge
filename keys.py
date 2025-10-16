@@ -289,7 +289,18 @@ def brute_force_vigenere(text, limit):
     og_fitness = st.tetra_fitness(text, tetra_frequencies)
     
     for length in range(1, limit+1):
-        print(int_to_key(length, 3))
+        for num in range(26**length):
+            key = int_to_key(num, length)
+            fitness = st.tetra_fitness(vigenere_decrypt(text, key), tetra_frequencies)
+            
+            if fitness > og_fitness:
+                og_fitness = fitness
+                og_key = key
+                print(f"{length}/{limit}, {num+1}/{26**length}: {key}")
+                
+    print(f"Best key: {og_key}")
+    
+    return vigenere_decrypt(text, key)
         
 def int_to_key(num, length):
     key = ""
