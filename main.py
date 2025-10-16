@@ -263,3 +263,7 @@ while running:
     elif cmd == "hill vigenere":
         period = int(input("Enter period of key: "))
         cipher = ks.hill_climb_vigenere(cipher, period)
+        
+    elif cmd == "angle vigenere":
+        period = int(input("Enter period of key: "))
+        cipher = ks.angle_vigenere(cipher, period)
