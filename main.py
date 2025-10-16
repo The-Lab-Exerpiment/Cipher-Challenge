@@ -252,5 +252,10 @@ while running:
         cipher = ks.vigenere_decrypt(cipher, key)
         
     elif cmd == "force vigenere":
-        limit = int(input("Enter limit of length of keyword: "))
-        cipher = ks.brute_force_vigenere(cipher, limit)
+        try:
+            lower = int(input("Enter lower limit for length of keyword: "))
+            upper = int(input("Enter upper limit of length of keyword: "))
+            cipher = ks.brute_force_vigenere(cipher, lower, upper)
+
+        except:
+            print("Invalid input")

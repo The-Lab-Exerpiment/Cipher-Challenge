@@ -282,13 +282,13 @@ def vigenere_decrypt(text, key):
 
     return poly_substitute(text, keys)
 
-def brute_force_vigenere(text, limit):
+def brute_force_vigenere(text, lower, upper):
     og_key = ""
         
     tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
     og_fitness = st.tetra_fitness(text, tetra_frequencies)
     
-    for length in range(1, limit+1):
+    for length in range(lower, upper+1):
         for num in range(26**length):
             key = int_to_key(num, length)
             fitness = st.tetra_fitness(vigenere_decrypt(text, key), tetra_frequencies)
@@ -296,7 +296,7 @@ def brute_force_vigenere(text, limit):
             if fitness > og_fitness:
                 og_fitness = fitness
                 og_key = key
-                print(f"{length}/{limit}, {num+1}/{26**length}: {key}")
+                print(f"{length-lower+1}/{upper-lower+1}, {num+1}/{26**length}: {key}")
                 
     print(f"Best key: {og_key}")
     
