@@ -255,9 +255,7 @@ def stochastic_hill_climb_mono(text, limit=50):
 
 def poly_substitute(text, keys):
     split = len(keys)
-    print(split)
     text = td.split_text(text, split)
-    print(text)
     
     for i in range(split):
         text[i] = mono_substitute(text[i], keys[i])
