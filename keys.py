@@ -362,3 +362,16 @@ def int_to_key(num, length):
         key += chr(ord('A') + (num // (26**i)) % 26)
         
     return key
+
+def generate_beaufort_keys(key):
+    key = td.remove_text(key).upper()
+    keys = []
+    
+    for letter in key:
+        shift = ord(letter) - ord('A') + 1
+        keys.append(generate_affine_key(1, shift)[::-1])
+        
+    return keys
+
+def beaufort(text, key):
+    return poly_substitute(text, generate_beaufort_keys(key))

@@ -261,9 +261,20 @@ while running:
             print("Invalid input")
             
     elif cmd == "hill vigenere":
-        period = int(input("Enter period of key: "))
-        cipher = ks.hill_climb_vigenere(cipher, period)
+        try:
+            period = int(input("Enter period of key: "))
+            cipher = ks.hill_climb_vigenere(cipher, period)
+            
+        except:
+            print("Invalid input")
         
     elif cmd == "angle vigenere":
-        period = int(input("Enter period of key: "))
-        cipher = ks.angle_vigenere(cipher, period)
+        try:
+            period = int(input("Enter period of key: "))
+            cipher = ks.angle_vigenere(cipher, period)
+        except:
+            print("Invalid input")
+        
+    elif cmd == "beaufort":
+        key = input("Enter keyword: ")
+        cipher = ks.beaufort(cipher, key)
