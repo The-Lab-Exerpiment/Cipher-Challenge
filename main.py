@@ -302,3 +302,7 @@ while running:
             cipher = ks.angle_beaufort(cipher, period)
         except:
             print("Invalid input")
+            
+    elif cmd == "invert key":
+        key = input("Enter key: ")
+        print(ks.invert_key(key))

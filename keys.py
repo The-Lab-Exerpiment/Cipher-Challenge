@@ -363,6 +363,15 @@ def int_to_key(num, length):
         
     return key
 
+def invert_key(key):
+    key = td.remove_text(key).upper()
+    inv_key = ""
+    
+    for letter in key:
+        inv_key += chr(ord('A') + (ord('Z') - ord(letter) + 1) % 26)
+        
+    return inv_key
+
 def generate_beaufort_keys(key):
     key = td.remove_text(key).upper()
     keys = []
