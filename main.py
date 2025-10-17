@@ -287,3 +287,11 @@ while running:
 
         except:
             print("Invalid input")
+            
+    elif cmd == "hill beaufort":
+        try:
+            period = int(input("Enter period of key: "))
+            cipher = ks.hill_climb_beaufort(cipher, period)
+            
+        except:
+            print("Invalid input")

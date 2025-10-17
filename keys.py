@@ -395,3 +395,34 @@ def brute_force_beaufort(text, lower, upper):
     print(f"Best key: {og_key}")
     
     return beaufort(text, og_key)
+
+def hill_climb_beaufort(text, period):
+    og_key = []
+    
+    for i in range(period):
+        og_key.append("A")
+        
+    tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+    og_fitness = st.tetra_fitness(text, tetra_frequencies)
+    
+    finished = False
+    
+    while not finished:
+        finished = True
+        
+        for i in range(period):
+            key = og_key.copy()
+            
+            for char in range(26):
+                key[i] = chr(ord('A') + char)
+                fitness = st.tetra_fitness(beaufort(text, st.list_to_str(key)), tetra_frequencies)
+                
+                if fitness > og_fitness:
+                    og_fitness = fitness
+                    og_key = key.copy()
+                    print(f"New key found: {st.list_to_str(og_key)}")
+                    finished = False
+                    
+    print(f"Best key: {st.list_to_str(og_key)}")
+    
+    return beaufort(text, st.list_to_str(og_key))
