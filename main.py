@@ -295,3 +295,10 @@ while running:
             
         except:
             print("Invalid input")
+            
+    elif cmd == "angle beaufort":
+        try:
+            period = int(input("Enter period of key: "))
+            cipher = ks.angle_beaufort(cipher, period)
+        except:
+            print("Invalid input")
