@@ -375,3 +375,23 @@ def generate_beaufort_keys(key):
 
 def beaufort(text, key):
     return poly_substitute(text, generate_beaufort_keys(key))
+
+def brute_force_beaufort(text, lower, upper):
+    og_key = ""
+        
+    tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
+    og_fitness = st.tetra_fitness(text, tetra_frequencies)
+    
+    for length in range(lower, upper+1):
+        for num in range(26**length):
+            key = int_to_key(num, length)
+            fitness = st.tetra_fitness(beaufort(text, key), tetra_frequencies)
+            
+            if fitness > og_fitness:
+                og_fitness = fitness
+                og_key = key
+                print(f"{length-lower+1}/{upper-lower+1}, {num+1}/{26**length}: {key}")
+                
+    print(f"Best key: {og_key}")
+    
+    return beaufort(text, og_key)

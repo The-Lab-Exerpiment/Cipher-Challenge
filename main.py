@@ -278,3 +278,12 @@ while running:
     elif cmd == "beaufort":
         key = input("Enter keyword: ")
         cipher = ks.beaufort(cipher, key)
+        
+    elif cmd == "force beaufort":
+        try:
+            lower = int(input("Enter lower limit for length of keyword: "))
+            upper = int(input("Enter upper limit of length of keyword: "))
+            cipher = ks.brute_force_beaufort(cipher, lower, upper)
+
+        except:
+            print("Invalid input")
