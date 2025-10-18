@@ -306,3 +306,7 @@ while running:
     elif cmd == "invert key":
         key = input("Enter key: ")
         print(ks.invert_key(key))
+        
+    elif cmd == "porta":
+        key = input("Enter key: ")
+        cipher = ks.porta(cipher, key)

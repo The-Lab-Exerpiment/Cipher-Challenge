@@ -457,3 +457,37 @@ def angle_beaufort(text, period):
     print(f"Best key: {key}")
         
     return beaufort(text, key)
+
+def generate_porta_keys(key, version="modern"):
+    key = td.remove_text(key).upper()
+    
+    keys = []
+    
+    for letter in key:
+        shift = ord(letter) - ord('A')
+        alpha_key = ""
+        
+        for char in range(ord('Z') - shift % 13 + 1, ord('Z') + 1):
+            alpha_key += chr(char)
+            
+        for char in range(ord('N'), ord('Z') - shift % 13 + 1):
+            alpha_key += chr(char)
+            
+        for char in range(ord('A') + shift % 13, ord('N')):
+            alpha_key += chr(char)
+            
+        for char in range(ord('A'), ord('A') + shift % 13):
+            alpha_key += chr(char)
+            
+        if shift // 13 == 0:
+            keys.append(alpha_key)
+            
+        else:
+            keys.append(alpha_key[::-1])
+            
+    print(keys)
+            
+    return keys
+
+def porta(text, key):
+    return poly_substitute(text, generate_porta_keys(key))
