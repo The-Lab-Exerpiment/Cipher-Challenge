@@ -520,3 +520,25 @@ def hill_climb_template(text, period, cipher):
     print(f"Best key: {st.list_to_str(og_key)}")
     
     return cipher(text, st.list_to_str(og_key))
+
+def angle_template(text, period, cipher):
+    blocks = td.split_text(text, period)
+    key = ""
+    mono_frequencies = td.get_mono_frequencies(dr.monos())
+    
+    for block in blocks:
+        best_char = 0
+        best_angle = 0
+        
+        for char in range(26):
+            angle = st.vector_cos(st.monolist(td.get_mono_text(cipher(block, chr(ord('A') + char)))), st.monolist(mono_frequencies))
+            
+            if angle > best_angle:
+                best_angle = angle
+                best_char = char
+                
+        key += chr(ord('A') + best_char)
+        
+    print(f"Best key: {key}")
+        
+    return cipher(text, key)

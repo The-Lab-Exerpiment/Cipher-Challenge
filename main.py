@@ -300,6 +300,7 @@ while running:
         try:
             period = int(input("Enter period of key: "))
             cipher = ks.angle_beaufort(cipher, period)
+            
         except:
             print("Invalid input")
             
@@ -316,5 +317,13 @@ while running:
             period = int(input("Enter period of key: "))
             cipher = ks.hill_climb_template(cipher, period, lambda text, key: ks.porta(text, key))
             
+        except:
+            print("Invalid input")
+            
+    elif cmd == "angle porta":
+        try:
+            period = int(input("Enter period of key: "))
+            cipher = ks.angle_template(cipher, period, lambda text, key: ks.porta(text, key))
+        
         except:
             print("Invalid input")
