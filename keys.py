@@ -237,7 +237,7 @@ def stochastic_hill_key_mono(text, limit=10000):
         
     return st.list_to_str(key)
 
-def stochastic_hill_climb_mono(text, limit=50):
+def stochastic_hill_climb_mono(text, limit=50, invert=True):
     tetra_frequencies = td.get_tetra_frequencies(dr.tetras())
     og_fitness = st.tetra_fitness(text, tetra_frequencies)
     og_key = ""
@@ -249,9 +249,9 @@ def stochastic_hill_climb_mono(text, limit=50):
         if fitness > og_fitness:
             og_fitness = fitness
             og_key = key
-            print(f"{i+1}/{limit}: {invert_alpha_key(og_key).upper()}")
+            print(f"{i+1}/{limit}: {invert_alpha_key(og_key).upper() if invert else og_key.upper()}")
             
-    print(f"Best key: {invert_alpha_key(og_key).upper()}")
+    print(f"Best key: {invert_alpha_key(og_key).upper() if invert else og_key.upper()}")
     
     return mono_substitute(text, og_key)
 
@@ -629,8 +629,8 @@ def two_stage_quagmire1(text, period):
                 
         key += chr(ord('A') + best_char)
         
-    print(key)
+    print(f"Best shift key: {key}")
         
     text = vigenere_decrypt(td.join_blocks(blocks), key)
     
-    return text
+    return stochastic_hill_climb_mono(text, invert=False)
