@@ -378,3 +378,8 @@ while running:
         key_cipher = input("Enter ciphertext key: ")
         key_period = input("Enter period key: ")
         cipher = ks.quagmire2(cipher, key_cipher, key_period)
+        
+    elif cmd == "decrypt quag 2":
+        key_cipher = input("Enter ciphertext key: ")
+        key_period = input("Enter period key: ")
+        cipher = ks.decrypt_quagmire2(cipher, key_cipher, key_period)

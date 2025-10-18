@@ -649,3 +649,6 @@ def generate_quagmire2_keys(key_cipher, key_period):
 
 def quagmire2(text, key_cipher, key_period):
     return poly_substitute(text, generate_quagmire2_keys(key_cipher, key_period))
+
+def decrypt_quagmire2(text, key_cipher, key_period):
+    return poly_decrypt(text, generate_quagmire2_keys(key_cipher, key_period))
