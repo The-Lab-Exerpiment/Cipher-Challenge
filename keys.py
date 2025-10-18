@@ -121,6 +121,8 @@ def angle_affine(text):
                     og_mult = mult
                     og_shift = shift
                     
+    print(f"Mult: {og_mult}, Shift: {og_shift}")
+                    
     return affine_decrypt(text, og_mult, og_shift)
 
 def caesar_shift(text, shift):
@@ -566,3 +568,29 @@ def angle_period_affine(text, period):
         blocks[i] = angle_affine(blocks[i])
         
     return td.join_blocks(blocks)
+
+def generate_quagmire1_keys(key_plain, key_period):
+    alpha_key = generate_sub_key(key_plain)
+    key_period = td.remove_text(key_period).upper()
+    setback = alpha_key.find('A')
+    
+    keys = []
+    
+    for letter in key_period:
+        key = ""
+        start = ord(letter) - ord('A') - setback
+        
+        for char in range(26):
+            key += chr(ord('A') + (start + char) % 26)
+            
+        keys.append(key)
+        
+    for i in range(len(keys)):
+        key = ""
+        
+        for char in range(26):
+            key += keys[i][alpha_key.find(chr(ord('A') + char))]
+            
+        keys[i] = key
+        
+    return keys
