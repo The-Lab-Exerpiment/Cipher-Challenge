@@ -329,17 +329,33 @@ while running:
             print("Invalid input")
             
     elif cmd == "poly affine":
-        period = int(input("Enter period: "))
-        
-        for offset in range(period):
-            mult = int(input(f"Enter multiplier {offset+1}: "))
-            shift = int(input(f"Enter shift {offset+1}: "))
-            cipher = ks.period_affine(cipher, mult, shift, period, offset)
+        try:
+            period = int(input("Enter period: "))
+            
+            for offset in range(period):
+                mult = int(input(f"Enter multiplier {offset+1}: "))
+                shift = int(input(f"Enter shift {offset+1}: "))
+                cipher = ks.period_affine(cipher, mult, shift, period, offset)
+
+        except:
+            print("Invalid input")
             
     elif cmd == "decrypt poly aff":
-        period = int(input("Enter period: "))
+        try:
+            period = int(input("Enter period: "))
+            
+            for offset in range(period):
+                mult = int(input(f"Enter multiplier {offset+1}: "))
+                shift = int(input(f"Enter shift {offset+1}: "))
+                cipher = ks.decrypt_period_affine(cipher, mult, shift, period, offset)
         
-        for offset in range(period):
-            mult = int(input(f"Enter multiplier {offset+1}: "))
-            shift = int(input(f"Enter shift {offset+1}: "))
-            cipher = ks.decrypt_period_affine(cipher, mult, shift, period, offset)
+        except:
+            print("Invalid input")
+                
+    elif cmd == "angle poly aff":
+        try:
+            period = int(input("Enter period: "))
+            cipher = ks.angle_period_affine(cipher, period)
+
+        except:
+            print("Invalid input")

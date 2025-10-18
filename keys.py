@@ -557,6 +557,12 @@ def decrypt_period_affine(text, mult, shift, period, offset):
     
     blocks[offset] = affine_decrypt(blocks[offset], mult, shift)
     
-    text = td.join_blocks(blocks)
+    return td.join_blocks(blocks)
+
+def angle_period_affine(text, period):
+    blocks = td.split_text(text, period)
     
-    return text
+    for i in range(period):
+        blocks[i] = angle_affine(blocks[i])
+        
+    return td.join_blocks(blocks)
