@@ -373,3 +373,8 @@ while running:
     elif cmd == "attack quag 1":
         period = int(input("Enter period: "))
         cipher = ks.two_stage_quagmire1(cipher, period)
+        
+    elif cmd == "quagmire 2":
+        key_cipher = input("Enter ciphertext key: ")
+        key_period = input("Enter period key: ")
+        cipher = ks.quagmire2(cipher, key_cipher, key_period)

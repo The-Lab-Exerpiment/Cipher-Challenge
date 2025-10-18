@@ -634,3 +634,18 @@ def two_stage_quagmire1(text, period):
     text = vigenere_decrypt(td.join_blocks(blocks), key)
     
     return stochastic_hill_climb_mono(text, invert=False)
+
+def generate_quagmire2_keys(key_cipher, key_period):
+    alpha_key = generate_sub_key(key_cipher)
+    keys = []
+    key_period = td.remove_text(key_period).upper()
+    
+    for letter in key_period:
+        split = alpha_key.find(letter)
+        key = alpha_key[split:] + alpha_key[:split]
+        keys.append(key)
+        
+    return keys
+
+def quagmire2(text, key_cipher, key_period):
+    return poly_substitute(text, generate_quagmire2_keys(key_cipher, key_period))
