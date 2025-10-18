@@ -310,3 +310,11 @@ while running:
     elif cmd == "porta":
         key = input("Enter key: ")
         cipher = ks.porta(cipher, key)
+        
+    elif cmd == "hill porta":
+        try:
+            period = int(input("Enter period of key: "))
+            cipher = ks.hill_climb_template(cipher, period, lambda text, key: ks.porta(text, key))
+            
+        except:
+            print("Invalid input")
