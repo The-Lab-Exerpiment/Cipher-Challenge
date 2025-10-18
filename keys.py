@@ -609,3 +609,28 @@ def quagmire1(text, key_plain, key_period):
 
 def quagmire1_decrypt(text, key_plain, key_period):
     return poly_decrypt(text, generate_quagmire1_keys(key_plain, key_period))
+
+def two_stage_quagmire1(text, period):
+    blocks = td.split_text(text, period)
+    mono_frequencies = td.get_mono_text(blocks[0])
+    
+    key = ""
+    
+    for block in blocks:
+        best_char = 0
+        best_angle = 0
+        
+        for char in range(26):
+            angle = st.vector_cos(st.monolist(td.get_mono_text(vigenere_decrypt(block, chr(ord('A') + char)))), st.monolist(mono_frequencies))
+            
+            if angle >= best_angle:
+                best_angle = angle
+                best_char = char
+                
+        key += chr(ord('A') + best_char)
+        
+    print(key)
+        
+    text = vigenere_decrypt(td.join_blocks(blocks), key)
+    
+    return text

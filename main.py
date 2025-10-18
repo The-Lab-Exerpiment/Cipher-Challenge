@@ -369,3 +369,7 @@ while running:
         key_plain = input("Enter plaintext key: ")
         key_period = input("Enter period key: ")
         cipher = ks.quagmire1_decrypt(cipher, key_plain, key_period)
+        
+    elif cmd == "attack quag 1":
+        period = int(input("Enter period: "))
+        cipher = ks.two_stage_quagmire1(cipher, period)
