@@ -264,6 +264,15 @@ def poly_substitute(text, keys):
         
     return td.join_blocks(text)
 
+def poly_decrypt(text, keys):
+    split = len(keys)
+    text = td.split_text(text, split)
+    
+    for i in range(split):
+        text[i] = mono_decrypt(text[i], keys[i])
+        
+    return td.join_blocks(text)
+
 def vigenere(text, key):
     key = td.remove_text(key).upper()
     
@@ -597,3 +606,6 @@ def generate_quagmire1_keys(key_plain, key_period):
 
 def quagmire1(text, key_plain, key_period):
     return poly_substitute(text, generate_quagmire1_keys(key_plain, key_period))
+
+def quagmire1_decrypt(text, key_plain, key_period):
+    return poly_decrypt(text, generate_quagmire1_keys(key_plain, key_period))
