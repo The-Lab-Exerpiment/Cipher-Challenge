@@ -594,3 +594,6 @@ def generate_quagmire1_keys(key_plain, key_period):
         keys[i] = key
         
     return keys
+
+def quagmire1(text, key_plain, key_period):
+    return poly_substitute(text, generate_quagmire1_keys(key_plain, key_period))

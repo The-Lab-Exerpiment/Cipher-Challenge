@@ -363,4 +363,4 @@ while running:
     elif cmd == "quagmire 1":
         key_plain = input("Enter plaintext key: ")
         key_period = input("Enter period key: ")
-        print(ks.generate_quagmire1_keys(key_plain, key_period))
+        cipher = ks.quagmire1(cipher, key_plain, key_period)
