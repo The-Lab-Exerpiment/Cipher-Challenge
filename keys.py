@@ -551,3 +551,12 @@ def period_affine(text, mult, shift, period, offset):
     text = td.join_blocks(blocks)
     
     return text
+
+def decrypt_period_affine(text, mult, shift, period, offset):
+    blocks = td.split_text(text, period)
+    
+    blocks[offset] = affine_decrypt(blocks[offset], mult, shift)
+    
+    text = td.join_blocks(blocks)
+    
+    return text

@@ -335,3 +335,11 @@ while running:
             mult = int(input(f"Enter multiplier {offset+1}: "))
             shift = int(input(f"Enter shift {offset+1}: "))
             cipher = ks.period_affine(cipher, mult, shift, period, offset)
+            
+    elif cmd == "decrypt poly aff":
+        period = int(input("Enter period: "))
+        
+        for offset in range(period):
+            mult = int(input(f"Enter multiplier {offset+1}: "))
+            shift = int(input(f"Enter shift {offset+1}: "))
+            cipher = ks.decrypt_period_affine(cipher, mult, shift, period, offset)
