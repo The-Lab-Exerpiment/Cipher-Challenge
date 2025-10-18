@@ -542,3 +542,12 @@ def angle_template(text, period, cipher):
     print(f"Best key: {key}")
         
     return cipher(text, key)
+
+def period_affine(text, mult, shift, period, offset):
+    blocks = td.split_text(text, period)
+    
+    blocks[offset] = affine_shift(blocks[offset], mult, shift)
+    
+    text = td.join_blocks(blocks)
+    
+    return text
